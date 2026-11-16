@@ -27,7 +27,7 @@ export function Pricing({ locale, dict }: Props) {
                 <div className="plan__price">
                   {p.price ? (
                     <>
-                      {/* A range ("€300-500") is shown as is, without "from" */}
+                      {/* A range ("€299-500") is shown as is, without "from" */}
                       {!p.price.includes("-") && <span className="plan__from">{dict.from}</span>}
                       <span className="plan__amount">{p.price}</span>
                     </>

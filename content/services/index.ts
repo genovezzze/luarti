@@ -41,7 +41,7 @@ export const services: ServicePage[] = [
     },
     image: { src: "/cases/pb-finanses/desktop-0.png", alt: { en: "PB Finanses website", lv: "PB Finanses mājaslapa" }, aspect: "16 / 10" },
     stats: [
-      { label: { en: "Price", lv: "Cena" }, value: price("from €300", "no €300") },
+      { label: { en: "Price", lv: "Cena" }, value: price("from €299", "no €299") },
       { label: { en: "Time", lv: "Termiņš" }, value: price("1-2 weeks", "1-2 nedēļas") },
       firstCall,
       estimate,
@@ -69,7 +69,7 @@ export const services: ServicePage[] = [
       { title: { en: "Launch", lv: "Palaišana" }, time: price("1 day", "1 diena") },
     ],
     prices: [
-      { name: { en: "Landing page", lv: "Landing lapa" }, price: price("from €300", "no €300") },
+      { name: { en: "Landing page", lv: "Landing lapa" }, price: price("from €299", "no €299") },
       { name: { en: "Company website, several pages", lv: "Uzņēmuma mājaslapa, vairākas lapas" }, price: onRequest },
       { name: { en: "Website with blog or catalogue", lv: "Mājaslapa ar blogu vai katalogu" }, price: onRequest },
     ],
@@ -189,7 +189,7 @@ export const services: ServicePage[] = [
     },
     image: { src: "/images/home/automation-docs.jpg", alt: { en: "Working with documents", lv: "Darbs ar dokumentiem" }, aspect: "3 / 2" },
     stats: [
-      { label: { en: "Price", lv: "Cena" }, value: price("from €500", "no €500") },
+      { label: { en: "Price", lv: "Cena" }, value: price("from €499", "no €499") },
       { label: { en: "Time", lv: "Termiņš" }, value: price("1-3 weeks", "1-3 nedēļas") },
       firstCall,
       estimate,
@@ -217,7 +217,7 @@ export const services: ServicePage[] = [
       { title: { en: "Testing on real documents", lv: "Testi ar reāliem dokumentiem" }, time: price("2-3 days", "2-3 dienas") },
     ],
     prices: [
-      { name: { en: "One document process", lv: "Viens dokumentu process" }, price: price("from €500", "no €500") },
+      { name: { en: "One document process", lv: "Viens dokumentu process" }, price: price("from €499", "no €499") },
       { name: { en: "Several processes and integrations", lv: "Vairāki procesi un integrācijas" }, price: onRequest },
     ],
     priceNote: { en: "The price depends on the type of documents and the systems they go to. Excl. VAT.", lv: "Cena atkarīga no dokumentu veida un sistēmām, uz kurām tie nonāk. Bez PVN." },
@@ -237,7 +237,7 @@ export const services: ServicePage[] = [
     },
     image: { src: "/cases/shadowy/employee-view.webp", alt: { en: "AI-assisted entry in Shadowy", lv: "AI atbalstīta ievade Shadowy" }, aspect: "1600 / 900" },
     stats: [
-      { label: { en: "Price", lv: "Cena" }, value: price("from €500", "no €500") },
+      { label: { en: "Price", lv: "Cena" }, value: price("from €499", "no €499") },
       { label: { en: "Time", lv: "Termiņš" }, value: price("1-3 weeks", "1-3 nedēļas") },
       firstCall,
       estimate,
@@ -265,7 +265,7 @@ export const services: ServicePage[] = [
       { title: { en: "Test with your team", lv: "Tests ar jūsu komandu" }, time: price("2-3 days", "2-3 dienas") },
     ],
     prices: [
-      { name: { en: "AI agent for one task", lv: "AI aģents vienam uzdevumam" }, price: price("from €500", "no €500") },
+      { name: { en: "AI agent for one task", lv: "AI aģents vienam uzdevumam" }, price: price("from €499", "no €499") },
       { name: { en: "Agent inside your system with approvals", lv: "Aģents jūsu sistēmā ar apstiprināšanu" }, price: onRequest },
     ],
     priceNote: { en: "AI service usage (tokens) is paid separately at cost. Excl. VAT.", lv: "AI servisa lietošana (tokeni) tiek apmaksāta atsevišķi pēc pašizmaksas. Bez PVN." },
