@@ -6,11 +6,12 @@
  * slides change on the side.
  */
 
+import Link from "next/link";
 import { useEffect, useRef, type CSSProperties } from "react";
 import type { Dict } from "@/lib/i18n";
 import { hideFade, hideText, playFade, playText, prepareFade, prepareText, reducedMotion } from "@/lib/textMotion";
 
-type Props = { title: [string, string] | string[]; dict: Dict["scene"] };
+type Props = { title: [string, string] | string[]; dict: Dict["scene"]; locale: string };
 
 type Frame = { x: number; y: number; rx: number; ry: number; rz: number; s: number; z: number };
 
@@ -55,7 +56,7 @@ const depth = (n: number): CSSProperties => ({
   transform: `var(--tf) translateZ(calc(var(--e) * var(--z) * var(--zm) * ${n}))`,
 });
 
-export function HeroScene({ title, dict }: Props) {
+export function HeroScene({ title, dict, locale }: Props) {
   const trackRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -280,8 +281,10 @@ export function HeroScene({ title, dict }: Props) {
 
           {dict.slides.map((s, n) => (
             <div key={s.tag} className="hs__slide hs__slide--side" data-slide={n + 2}>
-              <span className="hs__tag" data-fade="">{s.tag}</span>
-              <h2 className="hs__h hs__h--pre" data-at="" data-at-manual="">{s.title}</h2>
+              <Link href={`/${locale}/services/${s.href}`} className="hs__tag" data-fade="">{s.tag}</Link>
+              <Link href={`/${locale}/services/${s.href}`} className="hs__link">
+                <h2 className="hs__h hs__h--pre" data-at="" data-at-manual="">{s.title}</h2>
+              </Link>
               <p className="hs__p" data-at="body" data-at-manual="">{s.text}</p>
             </div>
           ))}

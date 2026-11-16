@@ -2,7 +2,7 @@ import type { en } from "./en";
 
 export const lv: typeof en = {
   meta: {
-    title: "LUARTI — mazāk rokas darba, vairāk laika biznesam",
+    title: "LUARTI - mazāk rokas darba, vairāk laika biznesam",
     description:
       "Landing lapas, platformas, CRM, dokumentu automatizācija, AI aģenti un Telegram Mini Apps uzņēmumiem.",
   },
@@ -30,9 +30,9 @@ export const lv: typeof en = {
       text: "Savienojam pieprasījumus, uzdevumus un pārskatus, lai nekas nepazustu un neviens nekopētu datus ar rokām.",
     },
     slides: [
-      { tag: "Platformas un CRM", title: "Jūsu pašu sistēma\nkomandai", text: "Platformas un CRM, veidotas jūsu procesam: klienti, pasūtījumi, uzdevumi un pārskati vienuviet." },
-      { tag: "Automatizācija un AI aģenti", title: "Rutīnas darbs\nnotiek pats", text: "Dokumenti aizpildās paši, AI aģenti atbild un sagatavo ierakstus. Vienmēr pārbauda cilvēks." },
-      { tag: "Mājaslapas un Mini Apps", title: "Mājaslapas, kas\npiesaista klientus", text: "Landing lapas, uzņēmumu mājaslapas un Telegram Mini Apps. Ātras, skaidras un vairākās valodās." },
+      { href: "platform", tag: "Platformas un CRM", title: "Jūsu pašu sistēma\nkomandai", text: "Platformas un CRM, veidotas jūsu procesam: klienti, pasūtījumi, uzdevumi un pārskati vienuviet." },
+      { href: "agents", tag: "Automatizācija un AI aģenti", title: "Rutīnas darbs\nnotiek pats", text: "Dokumenti aizpildās paši, AI aģenti atbild un sagatavo ierakstus. Vienmēr pārbauda cilvēks." },
+      { href: "website", tag: "Mājaslapas un Mini Apps", title: "Mājaslapas, kas\npiesaista klientus", text: "Landing lapas, uzņēmumu mājaslapas un Telegram Mini Apps. Ātras, skaidras un vairākās valodās." },
     ],
   },
   problem: {
@@ -70,7 +70,7 @@ export const lv: typeof en = {
     stepsTitle: "Kā notiek darbs",
     pricesTitle: "Cik maksā",
     faqTitle: "Jautājumi",
-    faqText: "Ja jūsu jautājuma šeit nav — uzrakstiet mums.",
+    faqText: "Ja jūsu jautājuma šeit nav - uzrakstiet mums.",
     more: "Uzzināt vairāk",
     all: "Visi pakalpojumi",
     items: [
@@ -79,7 +79,7 @@ export const lv: typeof en = {
         title: "Landing lapas un mājaslapas",
         text: "Ātras mājaslapas, kas piesaista klientus: landing lapas un uzņēmumu vietnes vairākās valodās.",
         points: ["Dizains jūsu zīmolam", "Ātra un ērta mobilajā", "Kontaktforma uz e-pastu vai CRM", "SEO pamati"],
-        time: "1–2 nedēļas",
+        time: "1-2 nedēļas",
         price: "no €300",
         package: "website",
         example: { slug: "pb-finanses", label: "Piemērs: PB Finanses" },
@@ -89,7 +89,7 @@ export const lv: typeof en = {
         title: "Platformas",
         text: "Jūsu pašu tīmekļa platforma komandai: lomas, dati un pārskati, veidota ap jūsu procesu.",
         points: ["Plānošanas darbnīca", "Lietotāju lomas un piekļuves", "Paneļi un pārskati", "AI tur, kur tas palīdz"],
-        time: "4–8 nedēļas",
+        time: "4-8 nedēļas",
         price: "Pēc pieprasījuma",
         package: "platform",
         example: { slug: "shadowy", label: "Piemērs: Shadowy" },
@@ -99,7 +99,7 @@ export const lv: typeof en = {
         title: "CRM",
         text: "CRM, kas veidota tam, kā jūs pārdodat: klienti, pieprasījumi, darījumi un atgādinājumi vienuviet.",
         points: ["Klienti un darījumu posmi", "Pieprasījumi no vietnes, e-pasta, čatiem", "Atgādinājumi un uzdevumi", "Pārdošanas pārskati"],
-        time: "4–8 nedēļas",
+        time: "4-8 nedēļas",
         price: "Pēc pieprasījuma",
         package: "platform",
         example: null,
@@ -109,7 +109,7 @@ export const lv: typeof en = {
         title: "Dokumentu automatizācija",
         text: "Rēķini, līgumi un pārskati tiek aizpildīti, pārbaudīti un sakārtoti automātiski.",
         points: ["PDF un skenu nolasīšana", "Veidņu aizpildīšana", "Nosūtīšana uz pareizo vietu", "Paziņojumi par kļūdām"],
-        time: "1–3 nedēļas",
+        time: "1-3 nedēļas",
         price: "no €500",
         package: "automation",
         example: null,
@@ -119,7 +119,7 @@ export const lv: typeof en = {
         title: "AI aģenti",
         text: "AI palīgi, kas atbild klientiem, sagatavo ierakstus un dara rutīnas darbus. Pārbauda cilvēks.",
         points: ["Apmācīti uz jūsu datiem", "Strādā čatā, e-pastā vai jūsu sistēmā", "Cilvēka apstiprinājums", "Katras darbības žurnāls"],
-        time: "1–3 nedēļas",
+        time: "1-3 nedēļas",
         price: "no €500",
         package: "automation",
         example: { slug: "shadowy", label: "Piemērs: AI ieraksti Shadowy" },
@@ -129,7 +129,7 @@ export const lv: typeof en = {
         title: "Telegram Mini Apps",
         text: "Pasūtījumi, rezervācijas vai klienta konts tieši Telegram. Nekas nav jāinstalē.",
         points: ["Dizains mobilajam", "Katalogs, rezervācijas vai pasūtījumi", "Administrācijas panelis", "Maksājumi, ja vajag"],
-        time: "3–5 nedēļas",
+        time: "3-5 nedēļas",
         price: "Pēc pieprasījuma",
         package: "telegram",
         example: null,
@@ -149,6 +149,35 @@ export const lv: typeof en = {
     comingSoon: "Jūsu projekts",
     comingSoonText: "Nākamais var būt jūsu. Pastāstiet, kas bremzē jūsu komandu.",
   },
+  about: {
+    eyebrow: "Par mani",
+    name: "Artemijs Lučins",
+    role: "LUARTI dibinātājs",
+    title: "Sveiki, es esmu Artemijs.",
+    lead: "Es veidoju platformas, automatizācijas un mājaslapas uzņēmumiem Latvijā. Kodu rakstu pats un runāju ar jums tieši, bez starpniekiem.",
+    whyTitle: "Kāpēc es to daru",
+    why: [
+      "Daudzi uzņēmumi joprojām strādā tabulās, čatos un kāda cilvēka atmiņā. Darbs pazūd, neviens neredz, cik patiesībā izmaksā klients, un viss turas uz vienu vai diviem cilvēkiem.",
+      "2026. gadā es izveidoju Shadowy: platformu, kurā komanda pieraksta katru darbu katram klientam un vadītājs redz reālās stundas un reālās izmaksas. Es ieviesu Shadowy grāmatvedības birojā, un komanda tajā pierakstīja savu darbu katru dienu.",
+      "Šis pilotprojekts man parādīja, kas man patīk visvairāk: padarīt darbu redzamu un vienkāršu. Es gribu, lai maziem un vidējiem uzņēmumiem Latvijā būtu tādas pašas sistēmas kā lielajiem, bez liela budžeta.",
+    ],
+    factsTitle: "Skaitļos un faktos",
+    facts: [
+      { value: "2026", label: "izveidoju Shadowy, savu platformu darba uzskaitei pa klientiem" },
+      { value: "2 115", label: "darba ierakstu, ko 10 darbinieki pierakstīja Shadowy pilotprojektā" },
+      { value: "CoLab 2026", label: "Kurzemes biznesa forums, kurā sākās Shadowy pilotprojekts" },
+      { value: "COLOURS", label: "biznesa idejas finansējums Shadowy no Ventspils Augstskolas" },
+    ],
+    howTitle: "Kā es strādāju",
+    how: [
+      "Godīgi pateikšu, ja sistēma jums vēl nav vajadzīga.",
+      "Sāku ar mazu un ātri parādu strādājošu rezultātu.",
+      "Visu izskaidroju vienkāršiem vārdiem, bez žargona.",
+    ],
+    personal: "Es esmu students un daudzus gadus spēlēju futbolu. No turienes nāk komandas darbs un disciplīna.",
+    photoAlt: "Artemijs Lučins, LUARTI dibinātājs",
+    cta: "Uzrakstīt man",
+  },
   approach: {
     title: "Kā mēs strādājam",
     text: "Vispirms saprotam, tad būvējam. Pēc jebkura soļa varat apstāties.",
@@ -165,7 +194,7 @@ export const lv: typeof en = {
       {
         title: "Uzbūvējam",
         text: "Uzbūvējam sistēmu jūsu procesam: dati, lomas, statusi, automatizācija. Progresu redzat katru nedēļu.",
-        time: "2–8 nedēļas",
+        time: "2-8 nedēļas",
         note: "fiksēta cena pirms sākuma",
       },
       {
@@ -199,7 +228,7 @@ export const lv: typeof en = {
         price: "€300",
         period: "vienreizēji",
         text: "Landing lapa vai neliela uzņēmuma mājaslapa. Precīza cena pēc īsas sarunas.",
-        timeline: "1–2 nedēļas",
+        timeline: "1-2 nedēļas",
         features: ["Dizains jūsu zīmolam", "Līdz 5 sadaļām vai lapām", "2 valodas", "Kontaktforma", "SEO pamati"],
       },
       {
@@ -208,7 +237,7 @@ export const lv: typeof en = {
         price: "€500",
         period: "vienreizēji",
         text: "Dokumenti tiek apstrādāti automātiski vai AI aģents vienam uzdevumam.",
-        timeline: "1–3 nedēļas",
+        timeline: "1-3 nedēļas",
         features: ["Izpētām procesu", "1 automatizācija vai AI aģents", "Savienojums ar jūsu programmām", "Paziņojumi par kļūdām", "30 dienu atbalsts"],
       },
       {
@@ -217,7 +246,7 @@ export const lv: typeof en = {
         price: "",
         period: "vienreizēji",
         text: "Pasūtījumi, rezervācijas vai klienta konts tieši Telegram.",
-        timeline: "3–5 nedēļas",
+        timeline: "3-5 nedēļas",
         features: ["Dizains mobilajam", "Katalogs, rezervācijas vai pasūtījumi", "Administrācijas panelis", "Maksājumi, ja vajag", "30 dienu atbalsts"],
       },
       {
@@ -226,7 +255,7 @@ export const lv: typeof en = {
         price: "",
         period: "vienreizēji",
         text: "Jūsu pašu platforma vai CRM visai komandai.",
-        timeline: "4–8 nedēļas",
+        timeline: "4-8 nedēļas",
         features: ["Plānošanas darbnīca", "Lietotāju lomas un piekļuves", "Klienti, uzdevumi, pārskati", "Eksports un integrācijas", "AI tur, kur tas palīdz", "3 mēnešu atbalsts"],
       },
     ],
@@ -243,7 +272,7 @@ export const lv: typeof en = {
   contact: {
     eyebrow: "Sākt projektu",
     title: "Pastāstiet par savu izaicinājumu.",
-    text: "Aprakstiet, kas aizņem pārāk daudz laika. Atbildam 1–2 darba dienās un piedāvājam īsu zvanu.",
+    text: "Aprakstiet, kas aizņem pārāk daudz laika. Atbildam 1-2 darba dienās un piedāvājam īsu zvanu.",
     steps: ["Jūs pastāstāt izaicinājumu", "Īss 20 minūšu zvans", "Mēs atsūtām plānu un cenu"],
     form: {
       name: "Vārds",
@@ -256,7 +285,7 @@ export const lv: typeof en = {
       messagePlaceholder: "Piemēram: katru mēnesi ar rokām ievadām 200 rēķinus…",
       submit: "Nosūtīt",
       sending: "Sūta…",
-      success: "Paldies! Saņēmām jūsu ziņu un atbildēsim 1–2 darba dienās.",
+      success: "Paldies! Saņēmām jūsu ziņu un atbildēsim 1-2 darba dienās.",
       error: "Kaut kas nogāja greizi. Mēģiniet vēlreiz vai rakstiet mums tieši.",
       required: "Lūdzu, aizpildiet vārdu, e-pastu un ziņu.",
     },

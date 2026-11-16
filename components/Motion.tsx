@@ -5,7 +5,7 @@
  *  - titles / body text: see lib/textMotion.ts
  *  - buttons / pills: morph open (scaleX .4 → 1, scaleY 1.15 → 1, label/arrow slide in)
  *  - other [data-reveal] blocks: rise 40px + fade
- * Elements inside the hero scene ([data-scene]) or marked [data-at-manual] are skipped —
+ * Elements inside the hero scene ([data-scene]) or marked [data-at-manual] are skipped -
  * the scene drives them itself.
  */
 

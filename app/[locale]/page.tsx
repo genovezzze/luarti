@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { About } from "@/components/About";
 import { ApproachSlider } from "@/components/ApproachSlider";
 import { CaseCard } from "@/components/CaseCard";
 import { CtaBand } from "@/components/CtaBand";
@@ -21,7 +22,7 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <>
-      <HeroScene title={d.hero.title} dict={d.scene} />
+      <HeroScene title={d.hero.title} dict={d.scene} locale={locale} />
 
       <ProblemSection dict={d.problem} href={`${home}/contact`} />
 
@@ -45,6 +46,8 @@ export default async function HomePage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      <About locale={locale} dict={d.about} />
 
       {/* APPROACH: pinned, steps change on scroll */}
       <ApproachSlider dict={d.approach} />

@@ -40,15 +40,15 @@ export async function POST(req: Request) {
   const from = process.env.CONTACT_FROM_EMAIL || "LUARTI <onboarding@resend.dev>";
 
   if (!apiKey || !to) {
-    console.error("[contact] RESEND_API_KEY or CONTACT_TO_EMAIL is not set — request not delivered:", data);
+    console.error("[contact] RESEND_API_KEY or CONTACT_TO_EMAIL is not set - request not delivered:", data);
     return NextResponse.json({ ok: false, error: "not_configured" }, { status: 503 });
   }
 
   const rows = [
     ["Name", data.name],
-    ["Company", data.company || "—"],
+    ["Company", data.company || "-"],
     ["Email", data.email],
-    ["Phone", data.phone || "—"],
+    ["Phone", data.phone || "-"],
     ["Package", data.package],
     ["Language", data.locale],
   ];
@@ -65,7 +65,7 @@ export async function POST(req: Request) {
       from,
       to: to.split(",").map((s) => s.trim()),
       reply_to: data.email,
-      subject: `New project request — ${data.company || data.name}`,
+      subject: `New project request - ${data.company || data.name}`,
       html,
       text: rows.map(([k, v]) => `${k}: ${v}`).join("\n") + `\n\n${data.message}`,
     }),

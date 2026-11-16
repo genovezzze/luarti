@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const c = getCase(slug);
   if (!c || !isLocale(locale)) return {};
   return {
-    title: `${c.client} — ${t(c.hero.title, locale)}`,
+    title: `${c.client} - ${t(c.hero.title, locale)}`,
     description: t(c.card.text, locale),
     alternates: { canonical: `/${locale}/work/${slug}` },
     openGraph: { images: [c.hero.image.src] },

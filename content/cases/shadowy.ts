@@ -36,8 +36,8 @@ export const shadowy: CaseStudy = {
   },
 
   problem: {
-    en: "Accounting firms don’t see how much time each client really takes — and why some clients need so much extra work.",
-    lv: "Grāmatvedības biroji neredz, cik laika patiesībā aizņem katrs klients — un kāpēc dažiem vajag tik daudz papildu darba.",
+    en: "Accounting firms don’t see how much time each client really takes - and why some clients need so much extra work.",
+    lv: "Grāmatvedības biroji neredz, cik laika patiesībā aizņem katrs klients - un kāpēc dažiem vajag tik daudz papildu darba.",
   },
   solution: {
     en: "A simple tool: an employee tells what they did, AI prepares the entry, a manager approves it. The firm sees what each client really costs.",

@@ -8,7 +8,7 @@ export type CaseImage = {
 };
 
 /**
- * A case study. Every block except the basics is optional — the case page
+ * A case study. Every block except the basics is optional - the case page
  * renders only the sections that are filled in.
  *
  * To add a new case: copy one of the files in this folder, change the content,

@@ -55,7 +55,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html lang={locale} className={font.variable} suppressHydrationWarning>
       <head>
-        {/* Hide animated text until it is split — avoids a flash before motion starts */}
+        {/* Hide animated text until it is split - avoids a flash before motion starts */}
         <script
           dangerouslySetInnerHTML={{
             __html: `if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("at-js")`,

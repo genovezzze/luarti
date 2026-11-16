@@ -36,23 +36,23 @@ export const services: ServicePage[] = [
     package: "website",
     title: { en: "Landing pages & websites", lv: "Landing lapas un mājaslapas" },
     lead: {
-      en: "A fast, clear website that explains what you do and brings requests — in the languages your clients speak.",
-      lv: "Ātra, skaidra mājaslapa, kas izskaidro, ko jūs darāt, un atnes pieprasījumus — valodās, kurās runā jūsu klienti.",
+      en: "A fast, clear website that explains what you do and brings requests - in the languages your clients speak.",
+      lv: "Ātra, skaidra mājaslapa, kas izskaidro, ko jūs darāt, un atnes pieprasījumus - valodās, kurās runā jūsu klienti.",
     },
     image: { src: "/cases/pb-finanses/desktop-0.png", alt: { en: "PB Finanses website", lv: "PB Finanses mājaslapa" }, aspect: "16 / 10" },
     stats: [
       { label: { en: "Price", lv: "Cena" }, value: price("from €300", "no €300") },
-      { label: { en: "Time", lv: "Termiņš" }, value: price("1–2 weeks", "1–2 nedēļas") },
+      { label: { en: "Time", lv: "Termiņš" }, value: price("1-2 weeks", "1-2 nedēļas") },
       firstCall,
       estimate,
     ],
     fit: [
       { quote: { en: "“We have no website, or it’s outdated”", lv: "“Mājaslapas nav vai tā ir novecojusi”" }, text: { en: "We make a modern site that looks good on a phone and loads fast.", lv: "Izveidojam modernu vietni, kas labi izskatās telefonā un ātri ielādējas." } },
       { quote: { en: "“People visit, but don’t contact us”", lv: "“Cilvēki ienāk, bet nesazinās”" }, text: { en: "Clear structure and one main action on every page: a call, a form or a booking.", lv: "Skaidra struktūra un viena galvenā darbība katrā lapā: zvans, forma vai pieteikums." } },
-      { quote: { en: "“We need it in Latvian and English”", lv: "“Vajag latviski un angliski”" }, text: { en: "Two or more languages with a simple switch — like on the PB Finanses site.", lv: "Divas vai vairāk valodas ar vienkāršu pārslēgšanu — kā PB Finanses vietnē." } },
+      { quote: { en: "“We need it in Latvian and English”", lv: "“Vajag latviski un angliski”" }, text: { en: "Two or more languages with a simple switch - like on the PB Finanses site.", lv: "Divas vai vairāk valodas ar vienkāršu pārslēgšanu - kā PB Finanses vietnē." } },
       { quote: { en: "“Requests get lost in email”", lv: "“Pieteikumi pazūd e-pastā”" }, text: { en: "The form sends requests straight to email, a CRM or Telegram.", lv: "Forma sūta pieteikumus uzreiz uz e-pastu, CRM vai Telegram." } },
     ],
-    objection: { quote: { en: "“Business is going fine — why do I need a website?”", lv: "“Bizness jau iet labi — kāpēc man mājaslapa?”" }, text: { en: "New clients look you up on Google first. If they don’t find you there, they go to whoever they find. A website works for you even when you’re not answering the phone.", lv: "Jauni klienti jūs vispirms meklē Google. Ja tur jūs neatrod, viņi aiziet pie tā, kuru atrod. Mājaslapa strādā jūsu labā arī tad, kad jūs neatbildat uz zvaniem." } },
+    objection: { quote: { en: "“Business is going fine - why do I need a website?”", lv: "“Bizness jau iet labi - kāpēc man mājaslapa?”" }, text: { en: "New clients look you up on Google first. If they don’t find you there, they go to whoever they find. A website works for you even when you’re not answering the phone.", lv: "Jauni klienti jūs vispirms meklē Google. Ja tur jūs neatrod, viņi aiziet pie tā, kuru atrod. Mājaslapa strādā jūsu labā arī tad, kad jūs neatbildat uz zvaniem." } },
     includes: [
       { title: { en: "Structure", lv: "Struktūra" }, text: { en: "What to say, in which order, and where to put the main button.", lv: "Ko teikt, kādā secībā un kur likt galveno pogu." } },
       { title: { en: "Design", lv: "Dizains" }, text: { en: "Made for your brand, not a template.", lv: "Veidots jūsu zīmolam, nevis pēc šablona." } },
@@ -64,7 +64,7 @@ export const services: ServicePage[] = [
     cases: ["pb-finanses"],
     steps: [
       { title: { en: "Call and estimate", lv: "Zvans un tāme" }, time: price("1 day", "1 diena") },
-      { title: { en: "Structure and texts", lv: "Struktūra un teksti" }, time: price("2–3 days", "2–3 dienas") },
+      { title: { en: "Structure and texts", lv: "Struktūra un teksti" }, time: price("2-3 days", "2-3 dienas") },
       { title: { en: "Design and development", lv: "Dizains un izstrāde" }, time: price("1 week", "1 nedēļa") },
       { title: { en: "Launch", lv: "Palaišana" }, time: price("1 day", "1 diena") },
     ],
@@ -92,17 +92,17 @@ export const services: ServicePage[] = [
     image: { src: "/cases/shadowy/beige-laptop.webp", alt: { en: "Shadowy platform", lv: "Shadowy platforma" }, aspect: "1615 / 891" },
     stats: [
       { label: { en: "Price", lv: "Cena" }, value: onRequest },
-      { label: { en: "Time", lv: "Termiņš" }, value: price("4–8 weeks", "4–8 nedēļas") },
+      { label: { en: "Time", lv: "Termiņš" }, value: price("4-8 weeks", "4-8 nedēļas") },
       firstCall,
       estimate,
     ],
     fit: [
       { quote: { en: "“Work lives in spreadsheets and chats”", lv: "“Darbs dzīvo tabulās un čatos”" }, text: { en: "We move it into one system where everyone sees the same data.", lv: "Pārnesam to vienā sistēmā, kur visi redz vienus datus." } },
       { quote: { en: "“Ready-made tools don’t fit our process”", lv: "“Gatavie rīki neder mūsu procesam”" }, text: { en: "We build exactly the screens and steps your team needs.", lv: "Uzbūvējam tieši tos ekrānus un soļus, kas vajadzīgi jūsu komandai." } },
-      { quote: { en: "“We don’t see what each client costs”", lv: "“Neredzam, cik izmaksā katrs klients”" }, text: { en: "Reports by client, employee and type of work — like in Shadowy.", lv: "Pārskati pa klientiem, darbiniekiem un darba veidiem — kā Shadowy." } },
+      { quote: { en: "“We don’t see what each client costs”", lv: "“Neredzam, cik izmaksā katrs klients”" }, text: { en: "Reports by client, employee and type of work - like in Shadowy.", lv: "Pārskati pa klientiem, darbiniekiem un darba veidiem - kā Shadowy." } },
       { quote: { en: "“Everything depends on one person”", lv: "“Viss turas uz viena cilvēka”" }, text: { en: "The process is written into the system, not into someone’s head.", lv: "Process ir ierakstīts sistēmā, nevis kāda galvā." } },
     ],
-    objection: { quote: { en: "“Excel is enough for us”", lv: "“Mums pietiek ar Excel”" }, text: { en: "While the team is small — yes. When there are more people and clients, spreadsheets start losing time and data. We’ll honestly tell you if it’s too early.", lv: "Kamēr komanda ir maza — jā. Kad cilvēku un klientu kļūst vairāk, tabulas sāk zaudēt laiku un datus. Godīgi pateiksim, ja vēl ir par agru." } },
+    objection: { quote: { en: "“Excel is enough for us”", lv: "“Mums pietiek ar Excel”" }, text: { en: "While the team is small - yes. When there are more people and clients, spreadsheets start losing time and data. We’ll honestly tell you if it’s too early.", lv: "Kamēr komanda ir maza - jā. Kad cilvēku un klientu kļūst vairāk, tabulas sāk zaudēt laiku un datus. Godīgi pateiksim, ja vēl ir par agru." } },
     includes: [
       { title: { en: "Planning", lv: "Plānošana" }, text: { en: "We map the process and agree what goes into the first version.", lv: "Izkartējam procesu un vienojamies, kas būs pirmajā versijā." } },
       { title: { en: "Design", lv: "Dizains" }, text: { en: "Clear screens for every role: employee, manager, owner.", lv: "Skaidri ekrāni katrai lomai: darbiniekam, vadītājam, īpašniekam." } },
@@ -114,8 +114,8 @@ export const services: ServicePage[] = [
     cases: ["shadowy"],
     steps: [
       { title: { en: "Call and process review", lv: "Zvans un procesa apskate" }, time: price("1 week", "1 nedēļa") },
-      { title: { en: "Screens and prototype", lv: "Ekrāni un prototips" }, time: price("1–2 weeks", "1–2 nedēļas") },
-      { title: { en: "Development", lv: "Izstrāde" }, time: price("3–5 weeks", "3–5 nedēļas") },
+      { title: { en: "Screens and prototype", lv: "Ekrāni un prototips" }, time: price("1-2 weeks", "1-2 nedēļas") },
+      { title: { en: "Development", lv: "Izstrāde" }, time: price("3-5 weeks", "3-5 nedēļas") },
       { title: { en: "Launch and onboarding", lv: "Palaišana un apmācība" }, time: price("1 week", "1 nedēļa") },
     ],
     prices: [
@@ -142,7 +142,7 @@ export const services: ServicePage[] = [
     image: { src: "/cases/shadowy/dashboard-wide.png", alt: { en: "Dashboard example", lv: "Paneļa piemērs" }, aspect: "1916 / 821" },
     stats: [
       { label: { en: "Price", lv: "Cena" }, value: onRequest },
-      { label: { en: "Time", lv: "Termiņš" }, value: price("4–8 weeks", "4–8 nedēļas") },
+      { label: { en: "Time", lv: "Termiņš" }, value: price("4-8 weeks", "4-8 nedēļas") },
       firstCall,
       estimate,
     ],
@@ -152,7 +152,7 @@ export const services: ServicePage[] = [
       { quote: { en: "“Standard CRMs are too complex”", lv: "“Standarta CRM ir pārāk sarežģītas”" }, text: { en: "Only the fields and steps you actually use.", lv: "Tikai tie lauki un soļi, ko jūs tiešām izmantojat." } },
       { quote: { en: "“We don’t know where sales get stuck”", lv: "“Nezinām, kur iestrēgst pārdošana”" }, text: { en: "Simple reports by stage and by manager.", lv: "Vienkārši pārskati pa posmiem un vadītājiem." } },
     ],
-    objection: { quote: { en: "“We remember our clients anyway”", lv: "“Klientus atceramies tāpat”" }, text: { en: "While there are few of them. A CRM remembers everyone — even when the manager is on holiday or leaves the company.", lv: "Kamēr to ir maz. CRM atceras visus — arī tad, kad vadītājs ir atvaļinājumā vai aiziet no uzņēmuma." } },
+    objection: { quote: { en: "“We remember our clients anyway”", lv: "“Klientus atceramies tāpat”" }, text: { en: "While there are few of them. A CRM remembers everyone - even when the manager is on holiday or leaves the company.", lv: "Kamēr to ir maz. CRM atceras visus - arī tad, kad vadītājs ir atvaļinājumā vai aiziet no uzņēmuma." } },
     includes: [
       { title: { en: "Clients", lv: "Klienti" }, text: { en: "Contacts, history and documents in one card.", lv: "Kontakti, vēsture un dokumenti vienā kartītē." } },
       { title: { en: "Deal stages", lv: "Darījumu posmi" }, text: { en: "Your sales steps, not someone else’s.", lv: "Jūsu pārdošanas soļi, nevis kāda cita." } },
@@ -165,7 +165,7 @@ export const services: ServicePage[] = [
     steps: [
       { title: { en: "Call and sales review", lv: "Zvans un pārdošanas apskate" }, time: price("1 week", "1 nedēļa") },
       { title: { en: "Fields, stages, screens", lv: "Lauki, posmi, ekrāni" }, time: price("1 week", "1 nedēļa") },
-      { title: { en: "Development and import", lv: "Izstrāde un imports" }, time: price("2–5 weeks", "2–5 nedēļas") },
+      { title: { en: "Development and import", lv: "Izstrāde un imports" }, time: price("2-5 weeks", "2-5 nedēļas") },
       { title: { en: "Launch and onboarding", lv: "Palaišana un apmācība" }, time: price("1 week", "1 nedēļa") },
     ],
     prices: [
@@ -175,7 +175,7 @@ export const services: ServicePage[] = [
     priceNote: { en: "The price depends on the number of users, stages and integrations. Excl. VAT.", lv: "Cena atkarīga no lietotāju, posmu un integrāciju skaita. Bez PVN." },
     related: { id: "agents", text: { en: "Want AI to answer clients first?", lv: "Vēlaties, lai AI pirmais atbild klientiem?" } },
     faq: [
-      { q: { en: "Why not a ready-made CRM?", lv: "Kāpēc ne gatava CRM?" }, a: { en: "If a ready one fits — great. We build when your process doesn’t fit or monthly fees get too high.", lv: "Ja gatava der — lieliski. Mēs būvējam, ja jūsu process neiederas vai mēneša maksas kļūst pārāk lielas." } },
+      { q: { en: "Why not a ready-made CRM?", lv: "Kāpēc ne gatava CRM?" }, a: { en: "If a ready one fits - great. We build when your process doesn’t fit or monthly fees get too high.", lv: "Ja gatava der - lieliski. Mēs būvējam, ja jūsu process neiederas vai mēneša maksas kļūst pārāk lielas." } },
       { q: { en: "Can you move our data?", lv: "Vai varat pārnest mūsu datus?" }, a: { en: "Yes, from Excel or another system.", lv: "Jā, no Excel vai citas sistēmas." } },
     ],
   },
@@ -184,13 +184,13 @@ export const services: ServicePage[] = [
     package: "automation",
     title: { en: "Document automation", lv: "Dokumentu automatizācija" },
     lead: {
-      en: "Invoices, contracts and reports are read, filled in, checked and sent automatically — your team stops copying data by hand.",
-      lv: "Rēķini, līgumi un pārskati tiek nolasīti, aizpildīti, pārbaudīti un nosūtīti automātiski — komanda vairs nekopē datus ar rokām.",
+      en: "Invoices, contracts and reports are read, filled in, checked and sent automatically - your team stops copying data by hand.",
+      lv: "Rēķini, līgumi un pārskati tiek nolasīti, aizpildīti, pārbaudīti un nosūtīti automātiski - komanda vairs nekopē datus ar rokām.",
     },
     image: { src: "/images/home/automation-docs.jpg", alt: { en: "Working with documents", lv: "Darbs ar dokumentiem" }, aspect: "3 / 2" },
     stats: [
       { label: { en: "Price", lv: "Cena" }, value: price("from €500", "no €500") },
-      { label: { en: "Time", lv: "Termiņš" }, value: price("1–3 weeks", "1–3 nedēļas") },
+      { label: { en: "Time", lv: "Termiņš" }, value: price("1-3 weeks", "1-3 nedēļas") },
       firstCall,
       estimate,
     ],
@@ -200,7 +200,7 @@ export const services: ServicePage[] = [
       { quote: { en: "“Reports take a whole day”", lv: "“Pārskati aizņem visu dienu”" }, text: { en: "Reports are built and sent on schedule.", lv: "Pārskati tiek sagatavoti un nosūtīti pēc grafika." } },
       { quote: { en: "“Mistakes appear when copying”", lv: "“Kopējot rodas kļūdas”" }, text: { en: "Checks catch errors and notify a person.", lv: "Pārbaudes atrod kļūdas un paziņo cilvēkam." } },
     ],
-    objection: { quote: { en: "“It only takes a couple of hours a week”", lv: "“Tas aizņem tikai pāris stundas nedēļā”" }, text: { en: "A couple of hours a week is about 100 hours a year — plus the mistakes. Automating one process usually pays off quickly.", lv: "Pāris stundas nedēļā ir ap 100 stundu gadā — plus kļūdas. Viena procesa automatizācija parasti atmaksājas ātri." } },
+    objection: { quote: { en: "“It only takes a couple of hours a week”", lv: "“Tas aizņem tikai pāris stundas nedēļā”" }, text: { en: "A couple of hours a week is about 100 hours a year - plus the mistakes. Automating one process usually pays off quickly.", lv: "Pāris stundas nedēļā ir ap 100 stundu gadā - plus kļūdas. Viena procesa automatizācija parasti atmaksājas ātri." } },
     includes: [
       { title: { en: "Process review", lv: "Procesa apskate" }, text: { en: "We find which documents take the most time.", lv: "Atrodam, kuri dokumenti aizņem visvairāk laika." } },
       { title: { en: "Reading", lv: "Nolasīšana" }, text: { en: "PDFs, scans and emails turned into data.", lv: "PDF, skeni un e-pasti pārvērsti datos." } },
@@ -211,10 +211,10 @@ export const services: ServicePage[] = [
     ],
     cases: [],
     steps: [
-      { title: { en: "Call and estimate", lv: "Zvans un tāme" }, time: price("1–2 days", "1–2 dienas") },
-      { title: { en: "Process and examples", lv: "Process un piemēri" }, time: price("2–3 days", "2–3 dienas") },
-      { title: { en: "Building the automation", lv: "Automatizācijas izveide" }, time: price("1–2 weeks", "1–2 nedēļas") },
-      { title: { en: "Testing on real documents", lv: "Testi ar reāliem dokumentiem" }, time: price("2–3 days", "2–3 dienas") },
+      { title: { en: "Call and estimate", lv: "Zvans un tāme" }, time: price("1-2 days", "1-2 dienas") },
+      { title: { en: "Process and examples", lv: "Process un piemēri" }, time: price("2-3 days", "2-3 dienas") },
+      { title: { en: "Building the automation", lv: "Automatizācijas izveide" }, time: price("1-2 weeks", "1-2 nedēļas") },
+      { title: { en: "Testing on real documents", lv: "Testi ar reāliem dokumentiem" }, time: price("2-3 days", "2-3 dienas") },
     ],
     prices: [
       { name: { en: "One document process", lv: "Viens dokumentu process" }, price: price("from €500", "no €500") },
@@ -223,7 +223,7 @@ export const services: ServicePage[] = [
     priceNote: { en: "The price depends on the type of documents and the systems they go to. Excl. VAT.", lv: "Cena atkarīga no dokumentu veida un sistēmām, uz kurām tie nonāk. Bez PVN." },
     related: { id: "agents", text: { en: "Need AI to make decisions on the content?", lv: "Vajag, lai AI saprot saturu?" } },
     faq: [
-      { q: { en: "Will it work with our accounting software?", lv: "Vai tas strādās ar mūsu grāmatvedības programmu?" }, a: { en: "Usually yes — through import files, email or an API. We check this on the first call.", lv: "Parasti jā — caur importa failiem, e-pastu vai API. To pārbaudām pirmajā zvanā." } },
+      { q: { en: "Will it work with our accounting software?", lv: "Vai tas strādās ar mūsu grāmatvedības programmu?" }, a: { en: "Usually yes - through import files, email or an API. We check this on the first call.", lv: "Parasti jā - caur importa failiem, e-pastu vai API. To pārbaudām pirmajā zvanā." } },
       { q: { en: "What if a document is unusual?", lv: "Ko, ja dokuments ir neparasts?" }, a: { en: "It goes to a person for review instead of being processed blindly.", lv: "Tas nonāk pie cilvēka pārbaudei, nevis tiek apstrādāts akli." } },
     ],
   },
@@ -232,23 +232,23 @@ export const services: ServicePage[] = [
     package: "automation",
     title: { en: "AI agents", lv: "AI aģenti" },
     lead: {
-      en: "AI assistants that answer clients, prepare entries and do routine tasks — and a person always checks the result.",
-      lv: "AI palīgi, kas atbild klientiem, sagatavo ierakstus un dara rutīnas darbus — un rezultātu vienmēr pārbauda cilvēks.",
+      en: "AI assistants that answer clients, prepare entries and do routine tasks - and a person always checks the result.",
+      lv: "AI palīgi, kas atbild klientiem, sagatavo ierakstus un dara rutīnas darbus - un rezultātu vienmēr pārbauda cilvēks.",
     },
     image: { src: "/cases/shadowy/employee-view.webp", alt: { en: "AI-assisted entry in Shadowy", lv: "AI atbalstīta ievade Shadowy" }, aspect: "1600 / 900" },
     stats: [
       { label: { en: "Price", lv: "Cena" }, value: price("from €500", "no €500") },
-      { label: { en: "Time", lv: "Termiņš" }, value: price("1–3 weeks", "1–3 nedēļas") },
+      { label: { en: "Time", lv: "Termiņš" }, value: price("1-3 weeks", "1-3 nedēļas") },
       firstCall,
       estimate,
     ],
     fit: [
       { quote: { en: "“We answer the same questions all day”", lv: "“Visu dienu atbildam uz vieniem jautājumiem”" }, text: { en: "The agent answers from your information and passes hard cases to a person.", lv: "Aģents atbild no jūsu informācijas un sarežģītos gadījumus nodod cilvēkam." } },
-      { quote: { en: "“Entering work data takes too long”", lv: "“Datu ievade aizņem pārāk ilgi”" }, text: { en: "Say or type it — AI prepares a structured entry, as in Shadowy.", lv: "Pasakiet vai uzrakstiet — AI sagatavo strukturētu ierakstu, kā Shadowy." } },
+      { quote: { en: "“Entering work data takes too long”", lv: "“Datu ievade aizņem pārāk ilgi”" }, text: { en: "Say or type it - AI prepares a structured entry, as in Shadowy.", lv: "Pasakiet vai uzrakstiet - AI sagatavo strukturētu ierakstu, kā Shadowy." } },
       { quote: { en: "“We’re afraid AI will make mistakes”", lv: "“Baidāmies, ka AI kļūdīsies”" }, text: { en: "Nothing important happens without human approval.", lv: "Nekas svarīgs nenotiek bez cilvēka apstiprinājuma." } },
-      { quote: { en: "“We don’t know where AI is useful”", lv: "“Nezinām, kur AI noder”" }, text: { en: "We look at your process and suggest 1–2 places where it really saves time.", lv: "Apskatām jūsu procesu un iesakām 1–2 vietas, kur tas tiešām ietaupa laiku." } },
+      { quote: { en: "“We don’t know where AI is useful”", lv: "“Nezinām, kur AI noder”" }, text: { en: "We look at your process and suggest 1-2 places where it really saves time.", lv: "Apskatām jūsu procesu un iesakām 1-2 vietas, kur tas tiešām ietaupa laiku." } },
     ],
-    objection: { quote: { en: "“We don’t need AI”", lv: "“AI mums nav vajadzīgs”" }, text: { en: "Maybe you really don’t. On the first call we’ll honestly say whether it will save you time — or not.", lv: "Varbūt tiešām nē. Pirmajā zvanā godīgi pateiksim, vai tas jums ietaupīs laiku — vai nē." } },
+    objection: { quote: { en: "“We don’t need AI”", lv: "“AI mums nav vajadzīgs”" }, text: { en: "Maybe you really don’t. On the first call we’ll honestly say whether it will save you time - or not.", lv: "Varbūt tiešām nē. Pirmajā zvanā godīgi pateiksim, vai tas jums ietaupīs laiku - vai nē." } },
     includes: [
       { title: { en: "Finding the task", lv: "Uzdevuma atrašana" }, text: { en: "Where AI saves time and where it doesn’t.", lv: "Kur AI ietaupa laiku un kur ne." } },
       { title: { en: "Your knowledge", lv: "Jūsu zināšanas" }, text: { en: "The agent works from your documents and rules.", lv: "Aģents strādā ar jūsu dokumentiem un noteikumiem." } },
@@ -259,10 +259,10 @@ export const services: ServicePage[] = [
     ],
     cases: ["shadowy"],
     steps: [
-      { title: { en: "Call and task choice", lv: "Zvans un uzdevuma izvēle" }, time: price("1–2 days", "1–2 dienas") },
-      { title: { en: "Knowledge and rules", lv: "Zināšanas un noteikumi" }, time: price("2–4 days", "2–4 dienas") },
-      { title: { en: "Building the agent", lv: "Aģenta izveide" }, time: price("1–2 weeks", "1–2 nedēļas") },
-      { title: { en: "Test with your team", lv: "Tests ar jūsu komandu" }, time: price("2–3 days", "2–3 dienas") },
+      { title: { en: "Call and task choice", lv: "Zvans un uzdevuma izvēle" }, time: price("1-2 days", "1-2 dienas") },
+      { title: { en: "Knowledge and rules", lv: "Zināšanas un noteikumi" }, time: price("2-4 days", "2-4 dienas") },
+      { title: { en: "Building the agent", lv: "Aģenta izveide" }, time: price("1-2 weeks", "1-2 nedēļas") },
+      { title: { en: "Test with your team", lv: "Tests ar jūsu komandu" }, time: price("2-3 days", "2-3 dienas") },
     ],
     prices: [
       { name: { en: "AI agent for one task", lv: "AI aģents vienam uzdevumam" }, price: price("from €500", "no €500") },
@@ -280,23 +280,23 @@ export const services: ServicePage[] = [
     package: "telegram",
     title: { en: "Telegram Mini Apps", lv: "Telegram Mini Apps" },
     lead: {
-      en: "Orders, bookings or a client account right inside Telegram — clients don’t need to install anything.",
-      lv: "Pasūtījumi, rezervācijas vai klienta konts tieši Telegram — klientiem nekas nav jāinstalē.",
+      en: "Orders, bookings or a client account right inside Telegram - clients don’t need to install anything.",
+      lv: "Pasūtījumi, rezervācijas vai klienta konts tieši Telegram - klientiem nekas nav jāinstalē.",
     },
     image: { src: "/images/home/office.jpg", alt: { en: "Team at work", lv: "Komanda darbā" }, aspect: "3 / 2" },
     stats: [
       { label: { en: "Price", lv: "Cena" }, value: onRequest },
-      { label: { en: "Time", lv: "Termiņš" }, value: price("3–5 weeks", "3–5 nedēļas") },
+      { label: { en: "Time", lv: "Termiņš" }, value: price("3-5 weeks", "3-5 nedēļas") },
       firstCall,
       estimate,
     ],
     fit: [
-      { quote: { en: "“Our clients are already in Telegram”", lv: "“Mūsu klienti jau ir Telegram”" }, text: { en: "Meet them where they are — no app store, no install.", lv: "Satieciet viņus tur, kur viņi ir — bez lietotņu veikala un instalēšanas." } },
+      { quote: { en: "“Our clients are already in Telegram”", lv: "“Mūsu klienti jau ir Telegram”" }, text: { en: "Meet them where they are - no app store, no install.", lv: "Satieciet viņus tur, kur viņi ir - bez lietotņu veikala un instalēšanas." } },
       { quote: { en: "“Bookings are done by phone”", lv: "“Rezervācijas notiek pa telefonu”" }, text: { en: "Clients pick a time themselves; you get a notification.", lv: "Klienti paši izvēlas laiku; jūs saņemat paziņojumu." } },
       { quote: { en: "“A mobile app is too expensive”", lv: "“Mobilā lietotne ir par dārgu”" }, text: { en: "A Mini App gives app-like screens for much less.", lv: "Mini App dod lietotnei līdzīgus ekrānus par daudz mazāku cenu." } },
       { quote: { en: "“We need to test an idea quickly”", lv: "“Ātri jāpārbauda ideja”" }, text: { en: "Launch in weeks and see if people use it.", lv: "Palaižam dažās nedēļās un redzam, vai cilvēki to lieto." } },
     ],
-    objection: { quote: { en: "“Clients can just call us”", lv: "“Klienti var vienkārši piezvanīt”" }, text: { en: "They can, but many don’t want to. Lots of people prefer to order or book themselves — at any time of day.", lv: "Var, bet daudzi negrib zvanīt. Daudzi labprātāk pasūta vai pierakstās paši — jebkurā diennakts laikā." } },
+    objection: { quote: { en: "“Clients can just call us”", lv: "“Klienti var vienkārši piezvanīt”" }, text: { en: "They can, but many don’t want to. Lots of people prefer to order or book themselves - at any time of day.", lv: "Var, bet daudzi negrib zvanīt. Daudzi labprātāk pasūta vai pierakstās paši - jebkurā diennakts laikā." } },
     includes: [
       { title: { en: "Scenario", lv: "Scenārijs" }, text: { en: "One main thing the app does well.", lv: "Viena galvenā lieta, ko lietotne dara labi." } },
       { title: { en: "Mobile design", lv: "Mobilais dizains" }, text: { en: "Screens made for a phone and Telegram.", lv: "Ekrāni telefonam un Telegram." } },
@@ -307,10 +307,10 @@ export const services: ServicePage[] = [
     ],
     cases: [],
     steps: [
-      { title: { en: "Call and scenario", lv: "Zvans un scenārijs" }, time: price("2–3 days", "2–3 dienas") },
+      { title: { en: "Call and scenario", lv: "Zvans un scenārijs" }, time: price("2-3 days", "2-3 dienas") },
       { title: { en: "Screens and prototype", lv: "Ekrāni un prototips" }, time: price("1 week", "1 nedēļa") },
-      { title: { en: "Development", lv: "Izstrāde" }, time: price("2–3 weeks", "2–3 nedēļas") },
-      { title: { en: "Launch in Telegram", lv: "Palaišana Telegram" }, time: price("2–3 days", "2–3 dienas") },
+      { title: { en: "Development", lv: "Izstrāde" }, time: price("2-3 weeks", "2-3 nedēļas") },
+      { title: { en: "Launch in Telegram", lv: "Palaišana Telegram" }, time: price("2-3 days", "2-3 dienas") },
     ],
     prices: [
       { name: { en: "Mini App with catalogue or booking", lv: "Mini App ar katalogu vai rezervācijām" }, price: onRequest },

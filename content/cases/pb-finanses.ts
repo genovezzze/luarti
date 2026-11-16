@@ -14,8 +14,8 @@ export const pbFinanses: CaseStudy = {
   card: {
     title: { en: "A financial firm, presented with clarity.", lv: "Finanšu uzņēmums, parādīts skaidri." },
     text: {
-      en: "A bilingual website for a full-service financial company in Ventspils — services, sectors, trust and a direct path to a consultation.",
-      lv: "Divvalodu mājaslapa pilna servisa finanšu uzņēmumam Ventspilī — pakalpojumi, nozares, uzticība un tiešs ceļš uz konsultāciju.",
+      en: "A bilingual website for a full-service financial company in Ventspils - services, sectors, trust and a direct path to a consultation.",
+      lv: "Divvalodu mājaslapa pilna servisa finanšu uzņēmumam Ventspilī - pakalpojumi, nozares, uzticība un tiešs ceļš uz konsultāciju.",
     },
     image: { src: img("desktop-0.png"), alt: { en: "PB Finanses website hero", lv: "PB Finanses mājaslapas galvene" }, aspect: "16 / 10" },
     overlay: { src: img("mobile-0.png"), alt: { en: "PB Finanses on mobile", lv: "PB Finanses mobilajā ierīcē" }, aspect: "390 / 844" },
@@ -25,8 +25,8 @@ export const pbFinanses: CaseStudy = {
   hero: {
     title: { en: "Trust, made visible online.", lv: "Uzticība, kas redzama arī tiešsaistē." },
     subtitle: {
-      en: "A bilingual website for PB Finanses — a full-service financial company.",
-      lv: "Divvalodu mājaslapa PB Finanses — pilna servisa finanšu uzņēmumam.",
+      en: "A bilingual website for PB Finanses - a full-service financial company.",
+      lv: "Divvalodu mājaslapa PB Finanses - pilna servisa finanšu uzņēmumam.",
     },
     tags: [
       { en: "Web design", lv: "Web dizains" },
