@@ -32,6 +32,7 @@ export function Header({ locale, dict }: Props) {
     { href: `${home}/work`, label: dict.work },
     { href: `${home}#approach`, label: dict.approach },
     { href: `${home}#pricing`, label: dict.pricing },
+    { href: `${home}/blog`, label: dict.blog },
     { href: `${home}/about`, label: dict.about },
     { href: `${home}/contact`, label: dict.contact },
   ];

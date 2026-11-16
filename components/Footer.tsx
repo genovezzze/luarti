@@ -20,6 +20,7 @@ export function Footer({ locale, dict }: Props) {
             <li><Link href={`${home}/work`}>{dict.nav.work}</Link></li>
             <li><Link href={`${home}#approach`}>{dict.nav.approach}</Link></li>
             <li><Link href={`${home}#pricing`}>{dict.nav.pricing}</Link></li>
+            <li><Link href={`${home}/blog`}>{dict.nav.blog}</Link></li>
             <li><Link href={`${home}/about`}>{dict.nav.about}</Link></li>
           </ul>
         </div>
