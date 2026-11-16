@@ -13,7 +13,7 @@ export const shadowy4Months: Post = {
     en: "I rolled out Shadowy in an accounting office: 10 people logged 2115 entries and 1652 hours in 4 months. Here is where the time went and 3 things to do with these numbers.",
     lv: "Ieviesu Shadowy grāmatvedības birojā: 10 cilvēki 4 mēnešos pierakstīja 2115 ierakstus un 1652 stundas. Lūk, kur aizgāja laiks un 3 lietas, ko ar šiem skaitļiem darīt.",
   },
-  cover: { src: "/cases/shadowy/dashboard-wide.png", alt: { en: "Shadowy work overview", lv: "Shadowy darba pārskats" }, aspect: "1916 / 821" },
+  cover: { src: "/cases/shadowy/orange-laptop.webp", alt: { en: "Shadowy process analysis: where work repeats and which clients take the most time", lv: "Shadowy procesu analīze: kur atkārtojas darbs un kuri klienti aizņem visvairāk laika" }, aspect: "1605 / 907" },
   source: {
     url: "https://www.linkedin.com/feed/update/urn:li:activity:7525837352863404032/",
     label: "LinkedIn",
