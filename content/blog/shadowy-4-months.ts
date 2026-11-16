@@ -3,8 +3,8 @@ import type { Post } from "./types";
 export const shadowy4Months: Post = {
   slug: "where-accountants-time-goes",
   date: "2026-11-10",
-  minutes: 4,
-  tag: { en: "Case study", lv: "Pētījums" },
+  category: "process",
+  featured: true,
   title: {
     en: "Where does an accountant’s time go? 4 months with Shadowy",
     lv: "Kur aiziet grāmatveža laiks? 4 mēneši ar Shadowy",

@@ -9,12 +9,16 @@ export type Block =
   | { type: "steps"; items: L[] }
   | { type: "quote"; text: L };
 
+/** Filter chips on the blog page; labels live in the dictionaries (blog.categories). */
+export type Category = "automation" | "platforms" | "ai" | "process";
+
 export type Post = {
   slug: string;
   /** ISO date, e.g. "2026-11-10" */
   date: string;
-  minutes: number;
-  tag: L;
+  category: Category;
+  /** Shown as the big featured post on the blog page */
+  featured?: boolean;
   title: L;
   excerpt: L;
   cover: { src: string; alt: L; aspect: string };

@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CtaBand } from "@/components/CtaBand";
-import { ArrowRight } from "@/components/Icons";
-import { formatDate, posts } from "@/content/blog";
+import { BlogIndex, type BlogItem } from "@/components/BlogIndex";
+import { posts, readingMinutes } from "@/content/blog";
 import { getDict, isLocale, locales, t } from "@/lib/i18n";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -28,37 +26,43 @@ export default async function BlogPage({ params }: Props) {
   if (!isLocale(locale)) notFound();
   const d = getDict(locale);
 
+  const items: BlogItem[] = posts.map((p) => ({
+    slug: p.slug,
+    href: `/${locale}/blog/${p.slug}`,
+    title: t(p.title, locale),
+    excerpt: t(p.excerpt, locale),
+    category: p.category,
+    minutes: readingMinutes(p, locale),
+    featured: !!p.featured,
+    cover: { src: p.cover.src, alt: t(p.cover.alt, locale) },
+  }));
+
   return (
     <>
-      <section className="section page-top">
+      <section className="page-top bx-hero">
         <div className="container">
-          <div className="section-head section-head--left" data-reveal>
-            <p className="eyebrow">{d.blog.eyebrow}</p>
-            <h1 className="h1">{d.blog.title}</h1>
-            <p className="lead">{d.blog.text}</p>
-          </div>
-          <div className="blist">
-            {posts.map((p) => (
-              <Link key={p.slug} href={`/${locale}/blog/${p.slug}`} className="bcard" data-reveal>
-                <div className="bcard__img">
-                  <Image src={p.cover.src} alt={t(p.cover.alt, locale)} fill sizes="(max-width: 720px) 100vw, 560px" />
-                </div>
-                <div className="bcard__body">
-                  <p className="bcard__meta">
-                    {t(p.tag, locale)} · <time dateTime={p.date}>{formatDate(p.date, locale)}</time> · {p.minutes} {d.blog.minutes}
-                  </p>
-                  <h2 className="bcard__title">{t(p.title, locale)}</h2>
-                  <p className="bcard__text">{t(p.excerpt, locale)}</p>
-                  <span className="bcard__more">
-                    {d.blog.read} <ArrowRight className="btn__icon" />
-                  </span>
-                </div>
-              </Link>
-            ))}
+          <p className="eyebrow">{d.blog.eyebrow}</p>
+          <div className="bx-hero__row">
+            <h1 className="h1 bx-hero__title">
+              {d.blog.title[0]}
+              <br />
+              {d.blog.title[1]}
+            </h1>
+            <p className="bx-hero__text">{d.blog.text}</p>
           </div>
         </div>
       </section>
-      <CtaBand title={d.cta.title} button={d.cta.button} href={`/${locale}/contact`} />
+
+      <BlogIndex items={items} dict={d.blog} />
+
+      <section className="bx-cta">
+        <div className="container bx-cta__in">
+          <p className="bx-cta__title">{d.blog.ctaTitle}</p>
+          <Link href={`/${locale}/contact`} className="btn btn--dark">
+            {d.blog.ctaButton}
+          </Link>
+        </div>
+      </section>
     </>
   );
 }

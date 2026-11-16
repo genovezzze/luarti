@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CtaBand } from "@/components/CtaBand";
 import { ArrowRight } from "@/components/Icons";
-import { formatDate, getPost, posts } from "@/content/blog";
+import { formatDate, getPost, posts, readingMinutes } from "@/content/blog";
 import type { Block } from "@/content/blog/types";
 import type { Locale } from "@/lib/i18n";
 import { getDict, isLocale, locales, siteUrl, t } from "@/lib/i18n";
@@ -102,6 +102,7 @@ export default async function PostPage({ params }: Props) {
   if (!isLocale(locale) || !post) notFound();
   const d = getDict(locale);
   const url = `${siteUrl}/${locale}/blog/${slug}`;
+  const more = posts.filter((p) => p.slug !== slug).slice(0, 3);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -129,7 +130,7 @@ export default async function PostPage({ params }: Props) {
           </Link>
           <header className="post__head">
             <p className="bcard__meta">
-              {t(post.tag, locale)} · <time dateTime={post.date}>{formatDate(post.date, locale)}</time> · {post.minutes} {d.blog.minutes}
+              {d.blog.categories[post.category]} · <time dateTime={post.date}>{formatDate(post.date, locale)}</time> · {readingMinutes(post, locale)} {d.blog.minutes}
             </p>
             <h1 className="h1 post__title">{t(post.title, locale)}</h1>
             <p className="lead">{t(post.excerpt, locale)}</p>
@@ -161,9 +162,29 @@ export default async function PostPage({ params }: Props) {
               </p>
             )}
           </div>
+
+          {more.length > 0 && (
+            <nav className="post__more" aria-label={d.blog.worth}>
+              <p className="post__more-h">{d.blog.worth}</p>
+              <ol className="bx-list">
+                {more.map((p, n) => (
+                  <li key={p.slug}>
+                    <Link href={`/${locale}/blog/${p.slug}`} className="bx-row">
+                      <span className="bx-row__n">{String(n + 1).padStart(2, "0")}</span>
+                      <span className="bx-row__main">
+                        <span className="bx-row__title">{t(p.title, locale)}</span>
+                        <span className="bx-row__cat">{d.blog.categories[p.category]}</span>
+                      </span>
+                      <ArrowRight className="btn__icon" />
+                    </Link>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          )}
         </div>
       </article>
-      <CtaBand title={d.blog.ctaTitle} button={d.cta.button} href={`/${locale}/contact`} />
+      <CtaBand title={d.blog.ctaTitle} button={d.blog.ctaButton} href={`/${locale}/contact`} />
     </>
   );
 }
