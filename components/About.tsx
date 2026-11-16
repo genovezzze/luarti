@@ -5,13 +5,13 @@ import Link from "next/link";
 import type { Dict, Locale } from "@/lib/i18n";
 import { ArrowRight, Tick } from "./Icons";
 
-type Props = { locale: Locale; dict: Dict["about"] };
+type Props = { locale: Locale; dict: Dict["about"]; page?: boolean };
 
 /** Put the portrait at public/images/about/artemijs.jpg - it is picked up automatically. */
 const PHOTO = "/images/about/artemijs.jpg";
 const hasPhoto = () => fs.existsSync(path.join(process.cwd(), "public", PHOTO));
 
-export function About({ locale, dict }: Props) {
+export function About({ locale, dict, page = false }: Props) {
   const photo = hasPhoto();
   const initials = dict.name
     .split(" ")
@@ -19,13 +19,13 @@ export function About({ locale, dict }: Props) {
     .join("");
 
   return (
-    <section className="section" id="about">
+    <section className={`section ${page ? "page-top" : ""}`} id="about">
       <div className="container">
         <div className="about">
           <div className="about__side">
             <div className="about__photo" data-reveal>
               {photo ? (
-                <Image src={PHOTO} alt={dict.photoAlt} fill sizes="(max-width: 900px) 100vw, 420px" />
+                <Image src={PHOTO} alt={dict.photoAlt} fill priority={page} sizes="(max-width: 900px) 100vw, 420px" />
               ) : (
                 <span className="about__initials" aria-label={dict.photoAlt}>{initials}</span>
               )}
@@ -36,7 +36,7 @@ export function About({ locale, dict }: Props) {
 
           <div className="about__main">
             <p className="eyebrow">{dict.eyebrow}</p>
-            <h2 className="h2">{dict.title}</h2>
+            {page ? <h1 className="h1 about__title">{dict.title}</h1> : <h2 className="h2">{dict.title}</h2>}
             <p className="lead">{dict.lead}</p>
 
             <h3 className="about__h">{dict.whyTitle}</h3>

@@ -11,6 +11,7 @@ export const lv: typeof en = {
     work: "Projekti",
     approach: "Kā strādājam",
     pricing: "Cenas",
+    about: "Par mani",
     contact: "Kontakti",
     cta: "Sākt projektu",
     menu: "Izvēlne",

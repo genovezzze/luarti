@@ -9,6 +9,7 @@ export const en = {
     work: "Projects",
     approach: "How we work",
     pricing: "Pricing",
+    about: "About",
     contact: "Contact",
     cta: "Start a project",
     menu: "Menu",

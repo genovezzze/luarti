@@ -149,12 +149,15 @@ export function HeroScene({ title, dict, locale }: Props) {
       if (mobile) {
         const vh = window.innerHeight;
         const cardH = Math.min(0.66 * wrap.clientWidth, 0.42 * vh);
-        const top = Math.max(112, 0.13 * vh);
+        const top = Math.max(96, 0.11 * vh);
         wrap.style.top = `${(72 + (top - 72) * e).toFixed(1)}px`;
         wrap.style.bottom = `${(8 + (vh - top - cardH - 8) * e).toFixed(1)}px`;
+        // Slide text sits right under the card instead of at the screen bottom
+        sticky.style.setProperty("--slide-top", `${Math.round(top + cardH + 36)}px`);
       } else {
         wrap.style.top = "";
         wrap.style.bottom = "";
+        sticky.style.removeProperty("--slide-top");
       }
       applyTf();
 

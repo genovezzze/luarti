@@ -32,6 +32,7 @@ export function Header({ locale, dict }: Props) {
     { href: `${home}/work`, label: dict.work },
     { href: `${home}#approach`, label: dict.approach },
     { href: `${home}#pricing`, label: dict.pricing },
+    { href: `${home}/about`, label: dict.about },
     { href: `${home}/contact`, label: dict.contact },
   ];
 
@@ -83,6 +84,13 @@ export function Header({ locale, dict }: Props) {
           {links.map((l) => (
             <Link key={l.href} href={l.href} onClick={() => setOpen(false)}>{l.label}</Link>
           ))}
+          <div className="lang lang--menu" role="group" aria-label="Language">
+            {locales.map((l) => (
+              <Link key={l} href={switchTo(l)} className={l === locale ? "is-active" : ""} hrefLang={l}>
+                {l.toUpperCase()}
+              </Link>
+            ))}
+          </div>
           <Link href={`${home}/contact`} className="btn btn--dark" onClick={() => setOpen(false)}>
             {dict.cta}
           </Link>
