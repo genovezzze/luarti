@@ -99,8 +99,8 @@ export const shadowy: CaseStudy = {
 
   results: [
     { value: "~30 s", label: { en: "to log a work entry", lv: "darba ieraksta fiksēšanai" } },
-    { value: "5", label: { en: "steps from entry to client report", lv: "soļi no ieraksta līdz pārskatam" } },
-    { value: "EU", label: { en: "data storage, exportable", lv: "datu glabāšana, eksportējami dati" } },
+    { value: "2115", label: { en: "work entries in a 4-month pilot", lv: "darba ieraksti 4 mēnešu pilotprojektā" } },
+    { value: "1652 h", label: { en: "of work, now visible per client", lv: "darba, tagad redzams pa klientiem" } },
     { value: "€49", label: { en: "per month for the whole office", lv: "mēnesī visam birojam" } },
   ],
 

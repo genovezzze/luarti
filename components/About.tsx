@@ -46,6 +46,31 @@ export function About({ locale, dict, page = false }: Props) {
               ))}
             </div>
 
+            <blockquote className="about__goal" data-reveal>
+              <span className="about__goal-label">{dict.goalTitle}</span>
+              <p className="about__goal-big">{dict.goal}</p>
+              <p className="about__goal-text">{dict.goalText}</p>
+            </blockquote>
+
+            <h3 className="about__h">{dict.pilotTitle}</h3>
+            <p className="about__pilot-text">{dict.pilotText}</p>
+            <div className="about__pilot" data-reveal>
+              {dict.pilot.map((r, i) => (
+                <div key={r.label} className={`about__bar${i === dict.pilot.length - 1 ? " about__bar--rest" : ""}`}>
+                  <div className="about__bar-head">
+                    <span>{r.label}</span>
+                    <span className="about__bar-num">
+                      {r.pct}% · {r.hours}
+                    </span>
+                  </div>
+                  <div className="about__bar-track">
+                    <span className="about__bar-fill" style={{ width: `${(r.pct / 29) * 100}%` }} />
+                  </div>
+                </div>
+              ))}
+              <p className="about__pilot-note">{dict.pilotNote}</p>
+            </div>
+
             <h3 className="about__h">{dict.factsTitle}</h3>
             <div className="about__facts">
               {dict.facts.map((f) => (
@@ -68,9 +93,14 @@ export function About({ locale, dict, page = false }: Props) {
 
             <p className="about__personal">{dict.personal}</p>
 
-            <Link href={`/${locale}/contact`} className="btn btn--dark">
-              {dict.cta} <ArrowRight className="btn__icon" />
-            </Link>
+            <div className="about__actions">
+              <Link href={`/${locale}/contact`} className="btn btn--dark">
+                {dict.cta} <ArrowRight className="btn__icon" />
+              </Link>
+              <a href={dict.postUrl} target="_blank" rel="noopener noreferrer" className="about__post">
+                {dict.postLink} <ArrowRight className="btn__icon" />
+              </a>
+            </div>
           </div>
         </div>
       </div>

@@ -507,6 +507,22 @@ html.lenis, html.lenis body { height: auto; }
 .about__how li { display: flex; gap: 10px; align-items: flex-start; font-size: 17px; }
 .about__tick { width: 18px; height: 18px; flex: none; margin-top: 4px; }
 .about__personal { margin: 16px 0 8px; font-size: 16px; color: var(--muted); max-width: 40em; }
+.about__goal { margin: 28px 0 0; width: 100%; padding: clamp(24px, 3vw, 36px); border-radius: var(--radius); background: #0b0b0b; color: #fff; display: flex; flex-direction: column; gap: 10px; }
+.about__goal-label { font-size: 14px; color: rgba(255,255,255,.55); }
+.about__goal-big { font-size: clamp(24px, 2.6vw, 34px); font-weight: 300; letter-spacing: -0.03em; line-height: 1.15; }
+.about__goal-text { font-size: 16px; line-height: 1.6; color: rgba(255,255,255,.75); max-width: 36em; }
+.about__pilot-text { font-size: 17px; color: var(--ink-2); max-width: 40em; }
+.about__pilot { width: 100%; display: flex; flex-direction: column; gap: 14px; padding: 22px 24px; border-radius: 18px; background: #fff; }
+.about__bar { display: flex; flex-direction: column; gap: 6px; }
+.about__bar-head { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; }
+.about__bar-num { color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.about__bar-track { height: 8px; border-radius: 99px; background: var(--bg-gray); overflow: hidden; }
+.about__bar-fill { display: block; height: 100%; border-radius: inherit; background: #0b0b0b; }
+.about__bar--rest .about__bar-fill { background: #c9c9c6; }
+.about__pilot-note { margin-top: 4px; font-size: 14px; color: var(--muted); line-height: 1.5; }
+.about__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
+.about__post { display: inline-flex; align-items: center; gap: 8px; font-size: 15px; color: var(--ink-2); text-decoration: underline; text-underline-offset: 4px; }
+.about__post:hover { color: var(--ink, #000); }
 
 /* ───────── Columns ───────── */
 .cols3 { display: grid; grid-template-columns: repeat(3, 1fr); }
