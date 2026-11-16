@@ -155,7 +155,7 @@ export const lv: typeof en = {
     name: "Artemijs Lučins",
     role: "LUARTI un Shadowy dibinātājs",
     title: "Sveiki, es esmu Artemijs.",
-    lead: "Es veidoju platformas, automatizācijas un mājaslapas uzņēmumiem Latvijā. Kodu rakstu pats un runāju ar jums tieši, bez starpniekiem.",
+    lead: "Es veidoju platformas, automatizācijas un mājaslapas uzņēmumiem Latvijā. Strādāju ar jums tieši, bez starpniekiem, un izmantoju AI, lai rezultāts būtu ātrāks un lētāks.",
     whyTitle: "Kāpēc es to daru",
     why: [
       "Pakalpojumu uzņēmumos ikdienā tiek izdarīts daudz darba, ko klients tieši neredz un par ko nemaksā. Nav redzams, cik laika aiziet vienam klientam un cik viņš patiesībā izmaksā. Gribēju redzēt skaitļus, nevis sajūtas.",

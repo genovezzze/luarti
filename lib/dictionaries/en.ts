@@ -153,7 +153,7 @@ export const en = {
     name: "Artemijs Lučins",
     role: "Founder of LUARTI and Shadowy",
     title: "Hi, I’m Artemijs.",
-    lead: "I build platforms, automations and websites for companies in Latvia. I write the code myself and talk to you directly, without managers in between.",
+    lead: "I build platforms, automations and websites for companies in Latvia. I work with you directly, without managers in between, and use AI so the result comes faster and costs less.",
     whyTitle: "Why I do this",
     why: [
       "Service companies do a lot of work every day that the client never sees and never pays for. Nobody knows how much time one client takes or what they really cost. I wanted to see numbers, not feelings.",
