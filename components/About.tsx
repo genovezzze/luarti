@@ -7,8 +7,8 @@ import { ArrowRight, Tick } from "./Icons";
 
 type Props = { locale: Locale; dict: Dict["about"]; page?: boolean };
 
-/** Put the portrait at public/images/about/artemijs.jpg - it is picked up automatically. */
-const PHOTO = "/images/about/artemijs.jpg";
+/** Put the portrait at public/images/about/artemijs-forum.jpg - it is picked up automatically. */
+const PHOTO = "/images/about/artemijs-forum.jpg";
 const hasPhoto = () => fs.existsSync(path.join(process.cwd(), "public", PHOTO));
 
 export function About({ locale, dict, page = false }: Props) {

@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${d.about.eyebrow} - ${d.about.name}`,
     description: d.about.lead,
     alternates: { canonical: `/${locale}/about` },
-    openGraph: { images: ["/images/about/artemijs.jpg"] },
+    openGraph: { images: ["/images/about/artemijs-forum.jpg"] },
   };
 }
 
