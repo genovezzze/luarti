@@ -203,7 +203,8 @@ ul, ol { padding: 0; list-style: none; }
 .hs__slide { position: absolute; left: 0; right: 0; bottom: 0; padding: 0 24px 48px; opacity: 0; pointer-events: none; }
 .hs__slide--intro { text-align: center; }
 .hs__link { display: block; color: inherit; }
-.hs__link:hover .hs__h { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 8px; }
+.hs__link .hs__h { transition: opacity .25s; }
+.hs__link:hover .hs__h { opacity: .7; }
 .hs__h { font-size: clamp(30px, 3.6vw, 52px); font-weight: 400; letter-spacing: -0.035em; line-height: 1.06; color: #fff; }
 .hs__p { font-size: 17px; line-height: 1.55; color: #a3a3a0; margin-top: 16px; max-width: 560px; }
 .hs__slide--intro .hs__p { margin-left: auto; margin-right: auto; max-width: 620px; }
@@ -429,7 +430,8 @@ html.lenis, html.lenis body { height: auto; }
 .wcard--slot .wcard__text { -webkit-line-clamp: 2; }
 
 /* ───────── Service detail page ───────── */
-.svc__title a:hover { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+.svc__title a { transition: opacity .25s; }
+.svc__title a:hover { opacity: .6; }
 .shero__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
 .shero__text { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; }
 .shero__back { font-size: 14px; color: var(--muted); }
