@@ -159,7 +159,7 @@ ul, ol { padding: 0; list-style: none; }
   --side: max(24px, calc((100% - 1600px) / 2 + 24px));
   position: sticky; top: 0; height: 100dvh; overflow: hidden; color: #fff;
   /* page background fades into black as the stack opens */
-  background: color-mix(in srgb, #050505 calc(min(1, var(--open) * 9) * 100%), var(--bg, #f4f4f2));
+  background: color-mix(in srgb, #050505 calc(var(--open) * 100%), var(--bg, #f4f4f2));
 }
 .hs__wrap { position: absolute; top: 72px; bottom: 8px; left: 8px; right: 8px; perspective: 1800px; perspective-origin: 55% 45%; }
 .hs__stage { position: absolute; inset: 0; transform-style: preserve-3d; will-change: transform; }
