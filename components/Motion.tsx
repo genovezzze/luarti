@@ -3,7 +3,7 @@
 /**
  * Scroll motion for LUARTI:
  *  - titles / body text: see lib/textMotion.ts
- *  - buttons / pills: open from the left edge (clip), label rises, arrow slides in
+ *  - buttons / pills: morph open (scaleX .4 → 1, scaleY 1.15 → 1, label/arrow slide in)
  *  - other [data-reveal] blocks: rise 40px + fade
  * Elements inside the hero scene ([data-scene]) or marked [data-at-manual] are skipped -
  * the scene drives them itself.
@@ -24,7 +24,7 @@ const RISE_EXTRA = ".case-card__visual, .gallery__item .shot";
 
 /* ───────── CTA (buttons & pills) ───────── */
 
-type Cta = { el: HTMLElement; label?: HTMLElement; arrow?: Element | null };
+type Cta = { el: HTMLElement; inner: HTMLElement; label?: HTMLElement; arrow?: Element | null; fill: boolean; bg: string; fg: string };
 
 function prepareCta(el: HTMLElement): Cta {
   let inner = el.querySelector<HTMLElement>(":scope > .cta-in");
@@ -40,36 +40,55 @@ function prepareCta(el: HTMLElement): Cta {
     inner.prepend(label);
     el.appendChild(inner);
   }
+  const cs = getComputedStyle(el);
   return {
     el,
+    inner,
     label: inner.querySelector<HTMLElement>(".cta-label") ?? undefined,
     arrow: inner.querySelector("svg"),
+    fill: el.matches(".btn--dark, .btn--light"),
+    bg: cs.backgroundColor,
+    fg: cs.color,
   };
 }
 
 function initialCta(c: Cta) {
-  const { el, label, arrow } = c;
+  const { el, inner, label, arrow } = c;
   el.style.transition = "none";
-  // Hidden behind a clip that will open from the left edge
-  gsap.set(el, { autoAlpha: 1, clipPath: "inset(0% 100% 0% 0% round 999px)" });
-  if (label) gsap.set(label, { y: "60%", opacity: 0 });
-  if (arrow) gsap.set(arrow, { x: -10, opacity: 0 });
+  gsap.set(el, { autoAlpha: 0, scaleX: 0.4, scaleY: 1.15, transformOrigin: "50% 50%" });
+  gsap.set(inner, { scaleX: 2.5, scaleY: 1 / 1.15, transformOrigin: "50% 50%" });
+  if (c.fill) gsap.set(el, { backgroundColor: "rgba(0,0,0,0)", color: c.bg, boxShadow: `inset 0 0 0 1px ${c.bg}` });
+  if (label) gsap.set(label, { x: -6 });
+  if (arrow) gsap.set(arrow, { x: 6 });
 }
 
-function playCta(c: Cta, delay = 0) {
-  const { el, label, arrow } = c;
+function playCta(c: Cta, delay = 0, duration = 0.85) {
+  const { el, inner, label, arrow } = c;
+  const half = 0.5 * duration;
+  const lag = (duration - half) * 0.55;
+  const inv = (prop: "scaleX" | "scaleY") => () => {
+    const v = Number(gsap.getProperty(el, prop));
+    return Number.isFinite(v) && v !== 0 ? 1 / v : 1;
+  };
   const tl = gsap.timeline({
     delay,
     onComplete: () => {
-      gsap.set(el, { clearProps: "clipPath,opacity,visibility" });
-      if (label) gsap.set(label, { clearProps: "transform,opacity" });
-      if (arrow) gsap.set(arrow, { clearProps: "transform,opacity" });
+      gsap.set(el, { clearProps: "transform,transformOrigin,opacity,visibility,backgroundColor,color,boxShadow" });
+      gsap.set(inner, { clearProps: "transform,transformOrigin" });
+      if (label) gsap.set(label, { clearProps: "transform" });
+      if (arrow) gsap.set(arrow, { clearProps: "transform" });
       el.style.transition = "";
     },
   });
-  tl.to(el, { clipPath: "inset(0% 0% 0% 0% round 999px)", duration: 0.75, ease: "expo.out" }, 0);
-  if (label) tl.to(label, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, 0.18);
-  if (arrow) tl.to(arrow, { x: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0.3);
+  tl.to(el, { scaleY: 1, duration, ease: "power2.inOut" }, 0);
+  tl.to(el, { autoAlpha: 1, scaleX: 1, duration: half, ease: "power2.out" }, 0);
+  tl.to(inner, { scaleY: 1, duration, ease: "none", modifiers: { scaleY: inv("scaleY") } }, 0);
+  tl.to(inner, { scaleX: 1, duration: half + lag, ease: "none", modifiers: { scaleX: inv("scaleX") } }, 0);
+  const slide = [label, arrow].filter(Boolean) as Element[];
+  if (slide.length) tl.to(slide, { x: 0, duration: half, ease: "power3.inOut" }, half);
+  if (c.fill) {
+    tl.to(el, { backgroundColor: c.bg, color: c.fg, boxShadow: "inset 0 0 0 1px rgba(0,0,0,0)", duration: half, ease: "power3.inOut" }, half);
+  }
 }
 
 /* ───────── Wire ───────── */
