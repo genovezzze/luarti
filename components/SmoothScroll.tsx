@@ -5,14 +5,14 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { gsap, reducedMotion, ScrollTrigger } from "@/lib/textMotion";
 
-/** Lenis smooth scrolling (same settings as atoms.technology: lerp 0.1), synced with GSAP. */
+/** Lenis smooth scrolling, synced with the GSAP ticker. */
 export function SmoothScroll() {
   const lenisRef = useRef<Lenis | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
     if (reducedMotion()) return;
-    const lenis = new Lenis({ lerp: 0.1, smoothWheel: true, anchors: { offset: -80 } });
+    const lenis = new Lenis({ lerp: 0.085, smoothWheel: true, anchors: { offset: -80 } });
     lenisRef.current = lenis;
     // Let components scroll smoothly to a position (e.g. step buttons)
     (window as unknown as { __lenis?: Lenis }).__lenis = lenis;

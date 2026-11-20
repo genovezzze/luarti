@@ -1,6 +1,8 @@
 /**
- * Text motion (GSAP + SplitText): masked lines rise, words slide in,
- * titles flash green → violet → final colour.
+ * Text motion (GSAP + SplitText).
+ *  - titles: each line slides up out of its mask, words sharpen from a soft
+ *    blur, and the colour settles from a muted grey into the final colour;
+ *  - body text: lines lift a little and fade in.
  * Shared by the scroll-wired Motion component and the hero scroll scene.
  */
 import gsap from "gsap";
@@ -9,8 +11,8 @@ import { SplitText } from "gsap/SplitText";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
-export const GREEN = "#72CE7B";
-export const VIOLET = "#79648C";
+/** Start colour of titles before they settle into their own colour. */
+const MUTED = "#8c8c88";
 
 export type TextState = {
   split: SplitText;
@@ -27,29 +29,28 @@ export const reducedMotion = () =>
 function create(el: HTMLElement): TextState {
   const variant = el.dataset.at === "body" ? "body" : "title";
   const ws = getComputedStyle(el).whiteSpace;
-  const pre = ws.startsWith("pre") || ws === "break-spaces";
+  const keepSpaces = ws.startsWith("pre") || ws === "break-spaces";
   const split = SplitText.create(el, {
     type: "words,lines",
     mask: "lines",
     wordsClass: "at-word",
     linesClass: "at-line",
-    reduceWhiteSpace: !pre,
+    reduceWhiteSpace: !keepSpaces,
   });
-  gsap.set(split.masks, { paddingTop: "0.12em", marginTop: "-0.12em", paddingBottom: "0.12em", marginBottom: "-0.12em" });
-  // Adjacent masks' negative margins collapse (-0.12em instead of -0.24em), making the split text
-  // taller than the original and causing a jump on revert. Compensate so the height is identical.
-  gsap.set(split.masks.slice(1), { marginTop: "-0.24em" });
+  // Give descenders room inside the masks without changing the block height:
+  // the first mask pulls up by the padding, the rest by padding + the previous mask's bottom.
+  gsap.set(split.masks, { paddingTop: "0.12em", paddingBottom: "0.12em", marginTop: "-0.24em", marginBottom: "-0.12em" });
+  gsap.set(split.masks[0], { marginTop: "-0.12em" });
   return { split, variant, shown: false };
 }
 
-export function initial(s: TextState) {
+function reset(s: TextState) {
   const { lines, words } = s.split;
   if (s.variant === "body") {
-    gsap.set(lines, { yPercent: 50, opacity: 1 });
-    gsap.set(words, { opacity: 0 });
+    gsap.set(lines, { yPercent: 60, opacity: 0 });
   } else {
-    gsap.set(lines, { yPercent: 400, x: 0, opacity: 0, color: GREEN });
-    gsap.set(words, { yPercent: 0, x: "30%", opacity: 0, color: GREEN });
+    gsap.set(lines, { yPercent: 110, color: MUTED });
+    gsap.set(words, { opacity: 0, filter: "blur(6px)" });
   }
 }
 
@@ -58,7 +59,7 @@ export function prepareText(el: HTMLElement): TextState {
   let s = states.get(el);
   if (!s) {
     s = create(el);
-    initial(s);
+    reset(s);
     states.set(el, s);
     el.dataset.atReady = "";
   }
@@ -77,7 +78,7 @@ export function disposeText(el: HTMLElement) {
 export function playText(el: HTMLElement, { delay = 0, once = false }: { delay?: number; once?: boolean } = {}) {
   const s = prepareText(el);
   s.tl?.kill();
-  initial(s);
+  reset(s);
   s.shown = true;
 
   const final = getComputedStyle(el).color;
@@ -86,7 +87,7 @@ export function playText(el: HTMLElement, { delay = 0, once = false }: { delay?:
   const tl = gsap.timeline({
     delay,
     onComplete: () => {
-      gsap.set([...lines, ...words], { clearProps: "color" });
+      gsap.set([...lines, ...words], { clearProps: "color,filter,opacity" });
       if (once) {
         s.split.revert();
         states.delete(el);
@@ -97,25 +98,18 @@ export function playText(el: HTMLElement, { delay = 0, once = false }: { delay?:
   s.tl = tl;
 
   if (s.variant === "body") {
-    const lt = 0.052 * Math.max(0, lines.length - 1);
-    const wt = 0.025 * Math.max(0, words.length - 1);
-    const total = Math.max(0.55, lt + 0.2, wt + 0.2);
-    tl.to(lines, { yPercent: 0, duration: total - lt, ease: "power3.out", stagger: 0.052 }, 0);
-    tl.to(words, { opacity: 1, duration: total - wt, ease: "power2.out", stagger: 0.025 }, 0);
+    tl.to(lines, { yPercent: 0, opacity: 1, duration: 0.8, ease: "expo.out", stagger: 0.07 });
     return;
   }
 
   lines.forEach((line, i) => {
+    const t = 0.11 * i;
+    tl.to(line, { yPercent: 0, duration: 1.05, ease: "expo.out" }, t);
+    tl.to(line, { color: final, duration: 0.9, ease: "sine.out" }, t + 0.25);
     const lineWords = words.filter((w) => line.contains(w));
-    const t = 0.08 * i;
-    tl.to(line, { yPercent: 0, x: 0, opacity: 1, duration: 1, ease: "power3.out" }, t);
-    tl.to(line, { color: VIOLET, duration: 0.3276, ease: "power1.inOut" }, t + 0.22);
-    tl.to(line, { color: final, duration: 0.4524, ease: "power1.inOut" }, t + 0.22 + 0.3276);
-    if (!lineWords.length) return;
-    const w = t + 0.04;
-    tl.to(lineWords, { x: 0, opacity: 1, duration: 0.9, ease: "power3.out", stagger: 0.03 }, w);
-    tl.to(lineWords, { color: VIOLET, duration: 0.29484, ease: "power1.inOut", stagger: 0.03 }, w + 0.198);
-    tl.to(lineWords, { color: final, duration: 0.40716, ease: "power1.inOut", stagger: 0.03 }, w + 0.198 + 0.29484);
+    if (lineWords.length) {
+      tl.to(lineWords, { opacity: 1, filter: "blur(0px)", duration: 0.7, ease: "power2.out", stagger: 0.035 }, t + 0.08);
+    }
   });
 }
 
@@ -124,36 +118,28 @@ export function hideText(el: HTMLElement) {
   if (!s) return;
   s.tl?.kill();
   if (!s.shown) {
-    initial(s);
+    reset(s);
     return;
   }
   s.shown = false;
-  const tl = gsap.timeline();
-  s.tl = tl;
   const lines = s.split.lines as HTMLElement[];
-  const words = s.split.words as HTMLElement[];
-  lines.forEach((line, i) => {
-    const lineWords = words.filter((w) => line.contains(w));
-    const t = 0.08 * i;
-    if (lineWords.length) tl.to(lineWords, { yPercent: -30, opacity: 0, duration: 0.4, ease: "power3.in", stagger: 0.03 }, t);
-    tl.to(line, { yPercent: -100, opacity: 0, duration: 0.5, ease: "power3.in" }, t + 0.02);
-  });
+  s.tl = gsap.timeline().to(lines, { yPercent: -110, duration: 0.45, ease: "power2.in", stagger: 0.05 });
 }
 
 /* Fade helpers for small labels */
 export function prepareFade(el: HTMLElement) {
   if (el.dataset.fadeReady !== undefined) return;
-  gsap.set(el, { opacity: 0 });
+  gsap.set(el, { opacity: 0, y: 6 });
   el.dataset.fadeReady = "";
 }
 export function playFade(el: HTMLElement, { delay = 0.3, duration = 0.6 } = {}) {
   prepareFade(el);
   gsap.killTweensOf(el);
-  gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration, delay });
+  gsap.to(el, { opacity: 1, y: 0, duration, delay, ease: "power2.out" });
 }
 export function hideFade(el: HTMLElement) {
   gsap.killTweensOf(el);
-  gsap.to(el, { opacity: 0, duration: 0.3, ease: "power2.in" });
+  gsap.to(el, { opacity: 0, y: -6, duration: 0.3, ease: "power2.in" });
 }
 
 export { gsap, ScrollTrigger };

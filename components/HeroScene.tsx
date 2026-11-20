@@ -1,9 +1,17 @@
 "use client";
 
 /**
- * Pinned hero scroll scene: the hero video card opens to full black, then tilts
- * in 3D and splits into depth layers ("Today" → video → "System") while text
- * slides change on the side.
+ * Hero scroll scene ("exploded view").
+ *
+ * The page scrolls through a tall track while the scene stays pinned. Scroll
+ * progress is turned into a continuous stage value q (0 = full-width video,
+ * 1..n = text slides). From q we compute, with formulas rather than keyframe
+ * tables:
+ *  - the stage pose: an orbit that slowly swings the stack from facing the
+ *    text towards facing the reader;
+ *  - the spread: layers pull apart diagonally (x, y and z), like an exploded
+ *    technical drawing - the video card stays in the middle of the stack.
+ * The mouse nudges each layer sideways in proportion to its depth (parallax).
  */
 
 import Link from "next/link";
@@ -13,48 +21,55 @@ import { hideFade, hideText, playFade, playText, prepareFade, prepareText, reduc
 
 type Props = { title: [string, string] | string[]; dict: Dict["scene"]; locale: string };
 
-type Frame = { x: number; y: number; rx: number; ry: number; rz: number; s: number; z: number };
-
-const DESKTOP: Frame[] = [
-  { x: 0, y: 0, rx: 0, ry: 0, rz: 0, s: 1, z: 0 },
-  { x: 0, y: -10, rx: 8, ry: -24, rz: 0, s: 0.56, z: 1 },
-  { x: 13, y: 0, rx: 6, ry: 20, rz: 0, s: 0.46, z: 1.1 },
-  { x: 13, y: 0, rx: -7, ry: 14, rz: -2, s: 0.46, z: 0.8 },
-  { x: 13, y: 0, rx: 10, ry: 24, rz: 2, s: 0.45, z: 1.3 },
-];
-const MOBILE: Frame[] = [
-  DESKTOP[0],
-  { x: 0, y: 0, rx: 8, ry: -18, rz: 0, s: 0.84, z: 1 },
-  { x: 0, y: 0, rx: 6, ry: 16, rz: 0, s: 0.82, z: 1 },
-  { x: 0, y: 0, rx: -7, ry: 12, rz: -2, s: 0.82, z: 0.8 },
-  { x: 0, y: 0, rx: 10, ry: 20, rz: 2, s: 0.8, z: 1.2 },
-];
-// Scroll progress → slide index, with holds between slides
-const STOPS: [number, number][] = [
-  [0, 0], [0.09, 1], [0.16, 1], [0.29, 2], [0.37, 2], [0.5, 3], [0.58, 3], [0.71, 4], [1, 4],
-];
-const NODE_X = [0.14, 0.38, 0.62, 0.86];
+/** Number of stages after the opening one: intro + three service slides. */
+const STAGES = 4;
+/** Share of each scroll segment spent moving; the rest is a pause on the slide. */
+const MOVE = 0.62;
+/** Dashed "today" boxes on the tools layer, in % of the card. */
 const TOOL_BOXES = [
-  { x: 6, y: 16, w: 24, h: 30 },
-  { x: 62, y: 12, w: 30, h: 26 },
-  { x: 10, y: 60, w: 28, h: 28 },
-  { x: 58, y: 56, w: 34, h: 32 },
+  { x: 5, y: 12, w: 27, h: 32 },
+  { x: 60, y: 9, w: 33, h: 28 },
+  { x: 8, y: 57, w: 31, h: 30 },
+  { x: 55, y: 52, w: 37, h: 35 },
 ];
 
-const clamp = (v: number) => Math.min(1, Math.max(0, v));
-const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
-function progressToSlide(p: number) {
-  for (let i = 1; i < STOPS.length; i++) {
-    const [p1, s1] = STOPS[i];
-    const [p0, s0] = STOPS[i - 1];
-    if (p <= p1) return s0 + (s1 - s0) * easeInOut(clamp((p - p0) / (p1 - p0 || 1)));
-  }
-  return STOPS[STOPS.length - 1][1];
+const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+/** Ken Perlin's smootherstep: zero velocity and acceleration at both ends. */
+const smoother = (t: number) => t * t * t * (t * (t * 6 - 15) + 10);
+
+/** Scroll progress (0..1) → stage value q (0..STAGES), pausing on each stage. */
+function stageFromProgress(p: number) {
+  const seg = 1 / STAGES;
+  const i = Math.min(STAGES - 1, Math.floor(p / seg));
+  const local = (p - i * seg) / seg;
+  return i + smoother(clamp01(local / MOVE));
 }
 
-const depth = (n: number): CSSProperties => ({
-  transform: `var(--tf) translateZ(calc(var(--e) * var(--z) * var(--zm) * ${n}))`,
-});
+type Pose = { x: number; y: number; yaw: number; pitch: number; roll: number; scale: number; spread: number };
+
+/** Pose of the stack on a given stage (q >= 1). Desktop sits to the right of the text. */
+function orbit(q: number, mobile: boolean): Pose {
+  const t = (q - 1) / (STAGES - 1); // 0..1 across the text slides
+  const yaw = -26 + 44 * t; // swings from facing the text to facing the reader
+  const pitch = 14 - 6 * t + 3 * Math.sin(t * Math.PI);
+  const roll = 1.8 * Math.sin(t * Math.PI * 2);
+  const spread = 1 + 0.35 * Math.sin(t * Math.PI); // most open in the middle
+  // Intro slide: centred above the text; from the next slide on it moves aside for the copy
+  const aside = smoother(clamp01(q - 1));
+  return mobile
+    ? { x: 0, y: 0, yaw: yaw * 0.7, pitch: pitch * 0.8, roll, scale: 0.8, spread }
+    : { x: 15 * aside, y: -5 + 6 * aside, yaw, pitch, roll, scale: 0.56 - 0.06 * aside, spread };
+}
+
+const FLAT: Pose = { x: 0, y: 0, yaw: 0, pitch: 0, roll: 0, scale: 1, spread: 0 };
+
+function mix(a: Pose, b: Pose, k: number): Pose {
+  const m = (u: number, v: number) => u + (v - u) * k;
+  return { x: m(a.x, b.x), y: m(a.y, b.y), yaw: m(a.yaw, b.yaw), pitch: m(a.pitch, b.pitch), roll: m(a.roll, b.roll), scale: m(a.scale, b.scale), spread: m(a.spread, b.spread) };
+}
+
+/** Layer index in the stack: negative = behind the video card, positive = in front. */
+const layer = (k: number): CSSProperties => ({ "--k": k } as CSSProperties);
 
 export function HeroScene({ title, dict, locale }: Props) {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -76,135 +91,137 @@ export function HeroScene({ title, dict, locale }: Props) {
       return;
     }
 
+    // Text groups per stage: 0 = hero title, 1..n = slides
     const slides = [...sticky.querySelectorAll<HTMLElement>("[data-slide]")];
     const groups = new Map<number, { texts: HTMLElement[]; fades: HTMLElement[] }>();
     groups.set(0, { texts: heroTitle ? [heroTitle] : [], fades: [] });
-    slides.forEach((s) =>
+    for (const s of slides) {
       groups.set(Number(s.dataset.slide), {
         texts: [...s.querySelectorAll<HTMLElement>("[data-at]")],
         fades: [...s.querySelectorAll<HTMLElement>("[data-fade]")],
-      })
-    );
+      });
+    }
 
-    let started = false;
-    let active = -1;
-    let mode = "";
-    let raf = 0;
-    let pose: Frame = DESKTOP[0];
-    let e = 0;
-    let mx = 0, my = 0, tx = 0, ty = 0, praf = 0;
-    const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    let ready = false;
+    let shown = -1;
+    let headerMode = "";
+    let frame = 0;
+    let open = 0;
 
-    const applyTf = () => {
-      const rx = pose.rx - 3 * my * e;
-      const ry = pose.ry + 4 * mx * e;
-      stage.style.setProperty(
-        "--tf",
-        `perspective(2200px) translate(${pose.x}%, ${pose.y}%) rotateX(${rx.toFixed(3)}deg) rotateY(${ry.toFixed(3)}deg) rotateZ(${pose.rz}deg) scale(${pose.s})`
-      );
-    };
-    const pointerLoop = () => {
-      mx += (tx - mx) * 0.08;
-      my += (ty - my) * 0.08;
-      applyTf();
-      praf = Math.abs(tx - mx) + Math.abs(ty - my) > 0.002 ? requestAnimationFrame(pointerLoop) : 0;
+    // Pointer parallax: target and smoothed value, -1..1
+    const ptr = { tx: 0, ty: 0, x: 0, y: 0, raf: 0 };
+    const hasMouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const parallax = () => {
+      ptr.x += (ptr.tx - ptr.x) * 0.1;
+      ptr.y += (ptr.ty - ptr.y) * 0.1;
+      sticky.style.setProperty("--px", `${(ptr.x * 14 * open).toFixed(2)}px`);
+      sticky.style.setProperty("--py", `${(ptr.y * 10 * open).toFixed(2)}px`);
+      ptr.raf = Math.abs(ptr.tx - ptr.x) + Math.abs(ptr.ty - ptr.y) > 0.001 ? requestAnimationFrame(parallax) : 0;
     };
     const onPointer = (ev: PointerEvent) => {
       if (ev.pointerType !== "mouse") return;
-      tx = (ev.clientX / window.innerWidth) * 2 - 1;
-      ty = (ev.clientY / window.innerHeight) * 2 - 1;
-      if (!praf) praf = requestAnimationFrame(pointerLoop);
+      ptr.tx = (ev.clientX / window.innerWidth) * 2 - 1;
+      ptr.ty = (ev.clientY / window.innerHeight) * 2 - 1;
+      if (!ptr.raf) ptr.raf = requestAnimationFrame(parallax);
     };
-    if (fine) window.addEventListener("pointermove", onPointer, { passive: true });
+    if (hasMouse) window.addEventListener("pointermove", onPointer, { passive: true });
 
-    const switchSlide = (q: number) => {
-      const r = Math.round(q);
-      const next = Math.abs(q - r) < 0.3 ? r : -1;
-      if (!started || next === active) return;
-      const prev = groups.get(active);
-      prev?.texts.forEach((el) => hideText(el));
-      prev?.fades.forEach(hideFade);
-      const cur = groups.get(next);
-      cur?.texts.forEach((el, i) => playText(el, { delay: 0.05 + 0.15 * i }));
-      cur?.fades.forEach((el) => playFade(el, { delay: 0.3 }));
-      active = next;
+    const showStage = (q: number) => {
+      const nearest = Math.round(q);
+      const target = Math.abs(q - nearest) < 0.25 ? nearest : -1;
+      if (!ready || target === shown) return;
+      const out = groups.get(shown);
+      out?.texts.forEach(hideText);
+      out?.fades.forEach(hideFade);
+      const inn = groups.get(target);
+      inn?.texts.forEach((el, i) => playText(el, { delay: 0.1 + 0.12 * i }));
+      inn?.fades.forEach((el) => playFade(el, { delay: 0.25 }));
+      shown = target;
     };
 
-    const update = () => {
-      raf = 0;
-      const rect = track.getBoundingClientRect();
-      const range = rect.height - window.innerHeight;
-      const q = progressToSlide(range > 0 ? clamp(-rect.top / range) : 0);
+    const render = () => {
+      frame = 0;
+      const box = track.getBoundingClientRect();
+      const travel = box.height - window.innerHeight;
+      const q = stageFromProgress(travel > 0 ? clamp01(-box.top / travel) : 0);
       const mobile = window.innerWidth < 1024;
-      const frames = mobile ? MOBILE : DESKTOP;
-      const a = frames[Math.floor(q)];
-      const b = frames[Math.min(frames.length - 1, Math.ceil(q))];
-      const h = q - Math.floor(q);
-      const lerp = (u: number, v: number) => u + (v - u) * h;
-      pose = { x: lerp(a.x, b.x), y: lerp(a.y, b.y), rx: lerp(a.rx, b.rx), ry: lerp(a.ry, b.ry), rz: lerp(a.rz, b.rz), s: lerp(a.s, b.s), z: lerp(a.z, b.z) };
-      e = clamp(q);
-      sticky.style.setProperty("--e", e.toFixed(4));
-      sticky.style.setProperty("--zm", pose.z.toFixed(3));
+
+      open = clamp01(q);
+      const pose = mix(FLAT, orbit(Math.max(1, q), mobile), open);
+      const unit = mobile ? 0.55 : 1;
+
+      sticky.style.setProperty("--open", open.toFixed(4));
+      stage.style.transform =
+        `translate(${pose.x.toFixed(2)}%, ${pose.y.toFixed(2)}%) ` +
+        `rotateX(${pose.pitch.toFixed(2)}deg) rotateY(${pose.yaw.toFixed(2)}deg) rotateZ(${pose.roll.toFixed(2)}deg) ` +
+        `scale(${pose.scale.toFixed(4)})`;
+      // Diagonal spread per layer step
+      sticky.style.setProperty("--sx", `${(26 * unit * pose.spread).toFixed(1)}px`);
+      sticky.style.setProperty("--sy", `${(-20 * unit * pose.spread).toFixed(1)}px`);
+      sticky.style.setProperty("--sz", `${(110 * unit * pose.spread).toFixed(1)}px`);
 
       if (mobile) {
+        // Card moves up and shrinks to a fixed height; slide text sits under it
         const vh = window.innerHeight;
-        const cardH = Math.min(0.66 * wrap.clientWidth, 0.42 * vh);
-        const top = Math.max(96, 0.11 * vh);
-        wrap.style.top = `${(72 + (top - 72) * e).toFixed(1)}px`;
-        wrap.style.bottom = `${(8 + (vh - top - cardH - 8) * e).toFixed(1)}px`;
-        // Slide text sits right under the card instead of at the screen bottom
-        sticky.style.setProperty("--slide-top", `${Math.round(top + cardH + 36)}px`);
+        const cardH = Math.min(0.64 * wrap.clientWidth, 0.4 * vh);
+        const top = Math.max(100, 0.12 * vh);
+        wrap.style.top = `${(72 + (top - 72) * open).toFixed(1)}px`;
+        wrap.style.bottom = `${(8 + (vh - top - cardH - 8) * open).toFixed(1)}px`;
+        sticky.style.setProperty("--slide-top", `${Math.round(top + cardH + 40)}px`);
       } else {
         wrap.style.top = "";
         wrap.style.bottom = "";
         sticky.style.removeProperty("--slide-top");
       }
-      applyTf();
 
-      slides.forEach((s) => {
-        const o = clamp(1 - 1.4 * Math.abs(q - Number(s.dataset.slide)));
+      for (const s of slides) {
+        const o = clamp01(1 - 1.6 * Math.abs(q - Number(s.dataset.slide)));
         s.style.opacity = o.toFixed(3);
         s.style.pointerEvents = o > 0.6 ? "auto" : "none";
-      });
-      switchSlide(q);
+      }
+      showStage(q);
 
-      const bottomGap = rect.bottom - window.innerHeight;
-      const m = bottomGap < 72 || q < 0.05 ? "top" : q < 1.5 ? "hidden" : "dark";
-      if (m !== mode) {
-        mode = m;
-        root.dataset.scene = m;
+      // Header style: light over the opening video and after the scene, hidden in between, dark on slides
+      const nearEnd = box.bottom - window.innerHeight < 72;
+      const mode = nearEnd || q < 0.05 ? "top" : q < 1.5 ? "hidden" : "dark";
+      if (mode !== headerMode) {
+        headerMode = mode;
+        root.dataset.scene = mode;
       }
     };
-    const schedule = () => {
-      if (!raf) raf = requestAnimationFrame(update);
+    const request = () => {
+      if (!frame) frame = requestAnimationFrame(render);
     };
 
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
-    update();
+    window.addEventListener("scroll", request, { passive: true });
+    window.addEventListener("resize", request);
+    render();
 
-    let cancelled = false;
+    let alive = true;
     (async () => {
       await document.fonts?.ready;
-      if (cancelled) return;
+      if (!alive) return;
       groups.forEach((g) => {
         g.texts.forEach((el) => prepareText(el));
         g.fades.forEach(prepareFade);
       });
-      started = true;
-      update();
+      ready = true;
+      render();
     })();
 
     return () => {
-      cancelled = true;
-      window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
+      alive = false;
+      window.removeEventListener("scroll", request);
+      window.removeEventListener("resize", request);
       window.removeEventListener("pointermove", onPointer);
-      if (raf) cancelAnimationFrame(raf);
-      if (praf) cancelAnimationFrame(praf);
+      if (frame) cancelAnimationFrame(frame);
+      if (ptr.raf) cancelAnimationFrame(ptr.raf);
       delete root.dataset.scene;
     };
   }, []);
+
+  const nodes = dict.nodes;
+  const nodeX = nodes.map((_, i) => (i + 0.5) / nodes.length);
 
   return (
     <section className="hs" data-scene>
@@ -212,30 +229,25 @@ export function HeroScene({ title, dict, locale }: Props) {
         <div className="hs__sticky" ref={stickyRef}>
           <div className="hs__wrap" ref={wrapRef}>
             <div className="hs__stage" ref={stageRef}>
-              <div className="hs__layer" style={{ ...depth(-1), opacity: "var(--e)" }} aria-hidden="true">
-                <span className="hs__frame" style={{ opacity: 0.22 }} />
-                <span className="hs__ticks">
-                  {Array.from({ length: 9 }, (_, i) => <span key={i} />)}
-                </span>
+              {/* Back: blueprint plate with corner marks */}
+              <div className="hs__layer hs__layer--back" style={layer(-1)} aria-hidden="true">
+                <span className="hs__frame hs__frame--faint" />
+                <span className="hs__corner hs__corner--tl" />
+                <span className="hs__corner hs__corner--tr" />
+                <span className="hs__corner hs__corner--bl" />
+                <span className="hs__corner hs__corner--br" />
               </div>
 
-              <div className="hs__card" style={{ transform: "var(--tf)" }}>
-                <video
-                  src="/videos/hero.mp4"
-                  poster="/videos/hero-poster.jpg"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="auto"
-                  aria-hidden="true"
-                />
-                <div className="hs__shade" style={{ opacity: "calc(0.45 - var(--e) * 0.2)" }} />
-                <span className="hs__chip hs__chip--corner" style={{ opacity: "var(--e)" }}>{dict.clip}</span>
+              {/* Middle: the video card */}
+              <div className="hs__card" style={layer(0)}>
+                <video src="/videos/hero.mp4" poster="/videos/hero-poster.jpg" autoPlay muted loop playsInline preload="auto" aria-hidden="true" />
+                <div className="hs__shade" />
+                <span className="hs__chip hs__chip--corner">{dict.clip}</span>
               </div>
 
-              <div className="hs__layer" style={{ ...depth(1), opacity: "var(--e)" }} aria-hidden="true">
-                <span className="hs__frame" style={{ opacity: 0.3 }} />
+              {/* Front 1: the scattered tools of today */}
+              <div className="hs__layer" style={layer(1)} aria-hidden="true">
+                <span className="hs__frame" />
                 {dict.tools.map((tool, i) => {
                   const b = TOOL_BOXES[i % TOOL_BOXES.length];
                   return (
@@ -247,20 +259,15 @@ export function HeroScene({ title, dict, locale }: Props) {
                 <span className="hs__chip hs__chip--edge">{dict.today}</span>
               </div>
 
-              <div className="hs__layer" style={{ ...depth(2), opacity: "var(--e)" }} aria-hidden="true">
-                <span className="hs__frame" style={{ opacity: 0.3 }} />
+              {/* Front 2: one system, a request travelling through the steps */}
+              <div className="hs__layer" style={layer(2)} aria-hidden="true">
+                <span className="hs__frame" />
                 <svg className="hs__flow">
-                  {NODE_X.slice(0, -1).map((x, i) => (
-                    <line key={x} x1={`${x * 100}%`} x2={`${NODE_X[i + 1] * 100}%`} y1="50%" y2="50%" />
-                  ))}
+                  <line x1={`${nodeX[0] * 100}%`} x2={`${nodeX[nodeX.length - 1] * 100}%`} y1="50%" y2="50%" />
                 </svg>
-                <span className="hs__dot" />
-                {dict.nodes.map((n, i) => (
-                  <span
-                    key={n}
-                    className="hs__chip hs__node"
-                    style={{ left: `${NODE_X[i] * 100}%`, animationDelay: `${(1.2 * i).toFixed(1)}s` }}
-                  >
+                <span className="hs__pulse" style={{ "--from": `${nodeX[0] * 100}%`, "--to": `${nodeX[nodeX.length - 1] * 100}%` } as CSSProperties} />
+                {nodes.map((n, i) => (
+                  <span key={n} className="hs__chip hs__node" style={{ left: `${nodeX[i] * 100}%`, animationDelay: `${(i * 1.1).toFixed(1)}s` }}>
                     {n}
                   </span>
                 ))}
@@ -269,7 +276,7 @@ export function HeroScene({ title, dict, locale }: Props) {
             </div>
           </div>
 
-          <div className="hs__title" style={{ opacity: "calc(1 - var(--e) * 3)" }}>
+          <div className="hs__title">
             <h1 className="hero__title" data-at="" data-at-manual="" data-hero-title="">
               {title[0]}
               <br />
