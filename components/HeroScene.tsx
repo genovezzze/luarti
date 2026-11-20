@@ -156,9 +156,9 @@ export function HeroScene({ title, dict, locale }: Props) {
         `rotateX(${pose.pitch.toFixed(2)}deg) rotateY(${pose.yaw.toFixed(2)}deg) rotateZ(${pose.roll.toFixed(2)}deg) ` +
         `scale(${pose.scale.toFixed(4)})`;
       // Diagonal spread per layer step
-      sticky.style.setProperty("--sx", `${(26 * unit * pose.spread).toFixed(1)}px`);
-      sticky.style.setProperty("--sy", `${(-20 * unit * pose.spread).toFixed(1)}px`);
-      sticky.style.setProperty("--sz", `${(110 * unit * pose.spread).toFixed(1)}px`);
+      sticky.style.setProperty("--sx", `${(10 * unit * pose.spread).toFixed(1)}px`);
+      sticky.style.setProperty("--sy", `${(-8 * unit * pose.spread).toFixed(1)}px`);
+      sticky.style.setProperty("--sz", `${(120 * unit * pose.spread).toFixed(1)}px`);
 
       if (mobile) {
         // Card moves up and shrinks to a fixed height; slide text sits under it
